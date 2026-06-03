@@ -1,0 +1,163 @@
+@font-face {
+  font-family: "Providence Sans";
+  src:
+    url("./assets/fonts/providence-sans-regular.woff2") format("woff2"),
+    url("./assets/fonts/providence-sans-regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Providence Sans";
+  src:
+    url("./assets/fonts/providence-sans-bold.woff2") format("woff2"),
+    url("./assets/fonts/providence-sans-bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --font-sans: "Providence Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Providence Sans", ui-sans-serif, system-ui, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --text-hero: clamp(0.875rem, 5vw, 2rem);
+  --color-link: var(--link);
+  --color-link-underline: var(--link-underline);
+
+  --color-neutral-100: var(--color-stone-100);
+  --color-neutral-200: var(--color-stone-200);
+  --color-neutral-300: var(--color-stone-300);
+  --color-neutral-400: var(--color-stone-400);
+  --color-neutral-500: var(--color-stone-500);
+  --color-neutral-600: var(--color-stone-600);
+  --color-neutral-700: var(--color-stone-700);
+  --color-neutral-800: var(--color-stone-800);
+  --color-neutral-900: var(--color-stone-900);
+  --color-neutral-950: var(--color-stone-950);
+
+  --color-accent-100: var(--color-orange-100);
+  --color-accent-200: var(--color-orange-200);
+  --color-accent-300: var(--color-orange-300);
+  --color-accent-400: var(--color-orange-400);
+  --color-accent-500: var(--color-orange-500);
+  --color-accent-600: var(--color-orange-600);
+  --color-accent-700: var(--color-orange-700);
+  --color-accent-800: var(--color-orange-800);
+  --color-accent-900: var(--color-orange-900);
+  --color-accent-950: var(--color-orange-950);
+}
+
+@layer theme {
+  :root {
+    color-scheme: light;
+
+    --background: var(--color-neutral-100);
+    --background-gradient-dark: var(--color-neutral-400);
+    --foreground: var(--color-neutral-900);
+    --muted: var(--color-neutral-200);
+    --muted-foreground: var(--color-neutral-600);
+    --border: var(--color-neutral-300);
+
+    --portrait-outline: var(--color-neutral-800);
+    --portrait-hair: var(--color-neutral-950);
+    --portrait-light: var(--color-neutral-600);
+    --portrait-lighter: var(--color-neutral-200);
+    --portrait-lightest: var(--color-neutral-100);
+
+    --selection-background: var(--color-accent-400);
+    --selection-foreground: var(--color-accent-100);
+
+    --link: var(--color-accent-600);
+    --link-underline: var(--color-accent-200);
+  }
+
+  .dark {
+    color-scheme: dark;
+
+    --background: var(--color-neutral-700);
+    --background-gradient-dark: var(--color-neutral-800);
+    --foreground: var(--color-neutral-100);
+    --muted: var(--color-neutral-800);
+    --muted-foreground: var(--color-neutral-400);
+    --border: var(--color-neutral-600);
+    --portrait-outline: var(--color-neutral-900);
+    --portrait-hair: var(--color-neutral-950);
+    --portrait-light: var(--color-neutral-600);
+    --portrait-lighter: var(--color-neutral-400);
+    --portrait-lightest: var(--color-neutral-300);
+
+    --selection-background: var(--color-accent-900);
+    --selection-foreground: var(--color-accent-100);
+
+    --link: var(--color-accent-500);
+    --link-underline: var(--color-accent-900);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not(.light) {
+      color-scheme: dark;
+    }
+  }
+}
+
+@utility small-caps {
+  font-variant: small-caps;
+  text-transform: lowercase;
+}
+
+@utility link {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-style: solid;
+  text-decoration-color: var(--color-link-underline);
+  text-underline-offset: 0.25em;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  ::selection {
+    background-color: var(--selection-background);
+    color: var(--selection-foreground);
+  }
+
+  html,
+  body,
+  #app {
+    min-height: 100%;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+
+  abbr {
+    text-underline-offset: 0.25em;
+    text-decoration-thickness: 1px;
+    text-decoration-style: solid;
+    text-decoration-color: var(--color-border);
+    color: var(--foreground);
+  }
+
+  h1,
+  h2 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+}

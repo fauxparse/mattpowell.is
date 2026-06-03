@@ -1,0 +1,324 @@
+html:has(.home) {
+  scroll-snap-type: y mandatory;
+}
+
+.home {
+  --vertical: min(80vw, 60dvh);
+  --big: clamp(2.5rem, 5vw, 5rem);
+  --horizontal: calc(50% + var(--big) * 1.5);
+  --gutter: calc(var(--big) * 0.1);
+  --slide-distance: 0.025;
+
+  container: home / inline-size;
+  display: contents;
+  timeline-scope: --creating, --improvising, --teaching, --writing, --building, --available;
+
+  > section,
+  > header {
+    overflow: hidden;
+    container: section / inline-size;
+  }
+
+  > header {
+    position: fixed;
+    inset: 0;
+
+    h1 {
+      position: absolute;
+      bottom: calc(100svh - var(--vertical));
+      left: 0;
+      width: var(--horizontal);
+      padding-inline: var(--gutter);
+      font-size: var(--big);
+      font-weight: 600;
+      margin: 0;
+      text-align: right;
+      color: var(--foreground);
+      white-space: nowrap;
+      z-index: 10;
+
+      &::after {
+        content: " is";
+      }
+
+      @container (width < 40rem) {
+        width: auto;
+        right: 0;
+        text-align: center;
+        margin-bottom: 1em;
+      }
+    }
+
+    .portrait {
+      [data-part="body"] {
+        transition: opacity 0.3s ease-in-out;
+      }
+
+      @container (width < 40rem) {
+        height: auto;
+        width: 100vw;
+
+        [data-part="body"] {
+          opacity: 0;
+        }
+      }
+    }
+  }
+
+  > section {
+    position: relative;
+    height: 100dvh;
+    scroll-snap-align: start;
+    container: section / inline-size;
+
+    h2 {
+      position: fixed;
+      bottom: calc(100svh - var(--vertical));
+      left: var(--horizontal);
+      padding-inline: var(--gutter);
+      font-size: var(--big);
+      font-weight: 600;
+      margin: 0;
+      color: var(--color-accent-600);
+      white-space: nowrap;
+      animation:
+        headingIn ease-out backwards,
+        headingOut ease-in forwards;
+      animation-range: entry, exit;
+      user-select: none;
+
+      @container (width < 40rem) {
+        width: auto;
+        right: 0;
+        left: 0;
+        text-align: center;
+      }
+    }
+
+    .content {
+      position: fixed;
+      top: var(--vertical);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding-inline: 1rem;
+      animation:
+        contentIn ease-out backwards,
+        contentOut ease-in forwards;
+      animation-range: entry, exit;
+    }
+  }
+
+  #creating {
+    view-timeline: --creating;
+
+    h2,
+    .content {
+      animation-timeline: --creating;
+    }
+  }
+
+  #improvising {
+    view-timeline: --improvising;
+
+    h2,
+    .content {
+      animation-timeline: --improvising;
+    }
+  }
+
+  #teaching {
+    view-timeline: --teaching;
+
+    h2,
+    .content {
+      animation-timeline: --teaching;
+    }
+  }
+
+  #writing {
+    view-timeline: --writing;
+
+    h2,
+    .content {
+      animation-timeline: --writing;
+    }
+  }
+
+  #building {
+    view-timeline: --building;
+
+    h2,
+    .content {
+      animation-timeline: --building;
+    }
+  }
+
+  #available {
+    view-timeline: --available;
+
+    h2,
+    .content {
+      animation-timeline: --available;
+    }
+  }
+
+  [data-scroll-indicator="down"] {
+    animation:
+      scrollIndicatorOut ease-out backwards,
+      scrollIndicatorIn ease-in forwards;
+    animation-timeline: --available;
+    animation-range: entry, exit;
+  }
+
+  [data-part="greys"] {
+    path {
+      animation: greys 1s linear both;
+      animation-timeline: scroll(root);
+    }
+
+    path:nth-child(1) {
+      animation-range: 0% 20%;
+    }
+
+    path:nth-child(2) {
+      animation-range: 10% 30%;
+    }
+
+    path:nth-child(3) {
+      animation-range: 20% 40%;
+    }
+
+    path:nth-child(4) {
+      animation-range: 30% 50%;
+    }
+
+    path:nth-child(5) {
+      animation-range: 40% 60%;
+    }
+
+    path:nth-child(6) {
+      animation-range: 50% 70%;
+    }
+
+    path:nth-child(7) {
+      animation-range: 60% 80%;
+    }
+
+    path:nth-child(8) {
+      animation-range: 70% 90%;
+    }
+
+    path:nth-child(9) {
+      animation-range: 80% 100%;
+    }
+  }
+}
+
+@keyframes headingIn {
+  0% {
+    transform: translateY(calc(var(--slide-distance) * 100dvh));
+    opacity: 0;
+    pointer-events: none;
+  }
+  25% {
+    transform: translateY(calc(var(--slide-distance) * 100dvh));
+    opacity: 0;
+    pointer-events: none;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+@keyframes headingOut {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  75% {
+    transform: translateY(calc(var(--slide-distance) * -100dvh));
+    opacity: 0;
+    pointer-events: none;
+  }
+  100% {
+    transform: translateY(calc(var(--slide-distance) * -100dvh));
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@keyframes contentIn {
+  0% {
+    transform: translateY(calc(var(--slide-distance) * 50dvh));
+    opacity: 0;
+    pointer-events: none;
+  }
+  50% {
+    transform: translateY(calc(var(--slide-distance) * 50dvh));
+    opacity: 0;
+    pointer-events: none;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+@keyframes contentOut {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  50% {
+    transform: translateY(calc(var(--slide-distance) * -50dvh));
+    opacity: 0;
+    pointer-events: none;
+  }
+  100% {
+    transform: translateY(calc(var(--slide-distance) * -50dvh));
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@keyframes scrollIndicatorOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes scrollIndicatorIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-25%);
+  }
+}
+
+@keyframes greys {
+  from {
+    stroke: var(--portrait-hair);
+  }
+  to {
+    stroke: var(--portrait-light);
+  }
+}
