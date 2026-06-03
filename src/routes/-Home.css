@@ -11,7 +11,8 @@ html:has(.home) {
 
   container: home / inline-size;
   display: contents;
-  timeline-scope: --creating, --improvising, --teaching, --writing, --building, --available;
+  timeline-scope:
+    --creating, --improvising, --teaching, --writing, --building, --available;
 
   > section,
   > header {
@@ -38,7 +39,7 @@ html:has(.home) {
       z-index: 10;
 
       &::after {
-        content: " is";
+        content: ' is';
       }
 
       @container (width < 40rem) {
@@ -50,7 +51,7 @@ html:has(.home) {
     }
 
     .portrait {
-      [data-part="body"] {
+      [data-part='body'] {
         transition: opacity 0.3s ease-in-out;
       }
 
@@ -58,7 +59,7 @@ html:has(.home) {
         height: auto;
         width: 100vw;
 
-        [data-part="body"] {
+        [data-part='body'] {
           opacity: 0;
         }
       }
@@ -163,7 +164,7 @@ html:has(.home) {
     }
   }
 
-  [data-scroll-indicator="down"] {
+  [data-scroll-indicator='down'] {
     animation:
       scrollIndicatorOut ease-out backwards,
       scrollIndicatorIn ease-in forwards;
@@ -171,7 +172,7 @@ html:has(.home) {
     animation-range: entry, exit;
   }
 
-  [data-part="greys"] {
+  [data-part='greys'] {
     path {
       animation: greys 1s linear both;
       animation-timeline: scroll(root);

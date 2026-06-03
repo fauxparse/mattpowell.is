@@ -1,10 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Portrait } from "#/components/Portrait.tsx";
+import { createFileRoute } from '@tanstack/react-router'
+import { Portrait } from '#/components/Portrait.tsx'
 
-import "./-Home.css";
-import { HomepageSection } from "#/components/HomepageSection.tsx";
+import './-Home.css'
+import { HomepageSection } from '#/components/HomepageSection.tsx'
 
-export const Route = createFileRoute("/")({ component: Home });
+export const Route = createFileRoute('/')({ component: Home })
 
 function Home() {
   return (
@@ -18,7 +18,10 @@ function Home() {
           className="fixed bottom-4 left-1/2 size-10 -translate-1/2"
           data-scroll-indicator="down"
         >
-          <button className="size-10 grid place-content-center animate-[float_1s_ease-in-out_infinite_alternate] z-20">
+          <button
+            className="size-10 grid place-content-center animate-[float_1s_ease-in-out_infinite_alternate] z-20"
+            aria-label="Scroll down"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 48 48"
@@ -38,31 +41,36 @@ function Home() {
       </header>
       <HomepageSection title="Creating">
         <HomepageSection.Paragraph>
-          I’m a performer, artist, and developer based in{" "}
+          I’m a performer, artist, and developer based in{' '}
           <abbr title="Wellington" className="whitespace-nowrap">
             Te Whanganui-a-Tara
           </abbr>
-          ,{" "}
+          ,{' '}
           <abbr title="New Zealand" className="whitespace-nowrap">
             Aotearoa
           </abbr>
-          . While I do many different things, they’re underpinned by a commitment to curiosity,
-          connection, and creativity.
+          . While I do many different things, they’re underpinned by a
+          commitment to curiosity, connection, and creativity.
         </HomepageSection.Paragraph>
         <HomepageSection.Note>
-          I’m queer and autistic and I have{" "}
-          <abbr title="Attention Deficit Hyperactivity Disorder" className="whitespace-nowrap">
+          I’m queer and autistic and I have{' '}
+          <abbr
+            title="Attention Deficit Hyperactivity Disorder"
+            className="whitespace-nowrap"
+          >
             ADHD
           </abbr>
-          . My pronouns are <b className="font-normal text-foreground">he/him</b>.
+          . My pronouns are{' '}
+          <b className="font-normal text-foreground">he/him</b>.
         </HomepageSection.Note>
       </HomepageSection>
       <HomepageSection title="Improvising">
         <HomepageSection.Paragraph>
-          I’ve been doing improv for 25+ years, in all kinds of formats and styles.
+          I’ve been doing improv for 25+ years, in all kinds of formats and
+          styles.
         </HomepageSection.Paragraph>
         <HomepageSection.Note>
-          From 2023–2025 I was Artistic Co-Director of{" "}
+          From 2023–2025 I was Artistic Co-Director of{' '}
           <a
             className="link"
             href="https://improvfest.nz"
@@ -76,8 +84,8 @@ function Home() {
       </HomepageSection>
       <HomepageSection title="Teaching">
         <HomepageSection.Paragraph>
-          I’ve taught improv at festivals all around Aotearoa and Australia, and as far away as
-          La&nbsp;Réunion and Peru.
+          I’ve taught improv at festivals all around Aotearoa and Australia, and
+          as far away as La&nbsp;Réunion and Peru.
         </HomepageSection.Paragraph>
         <HomepageSection.Note>
           Here you can find some of the many workshops I’m available to teach.
@@ -90,16 +98,22 @@ function Home() {
       </HomepageSection>
       <HomepageSection title="Building">
         <HomepageSection.Paragraph>
-          I've been building websites and applications since the late 1990s. Currently I'm working
-          as a Senior Software Engineer at{" "}
-          <a className="link" href="https://lyssna.com/" target="_blank" rel="noopener noreferrer">
+          I've been building websites and applications since the late 1990s.
+          Currently I'm working as a Senior Software Engineer at{' '}
+          <a
+            className="link"
+            href="https://lyssna.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Lyssna
           </a>
           .
         </HomepageSection.Paragraph>
         <HomepageSection.Note>
-          Right now I’m working on a system called <b className="font-normal text-link">Presence</b>{" "}
-          for managing interactive theatre experiences.
+          Right now I’m working on a system called{' '}
+          <b className="font-normal text-link">Presence</b> for managing
+          interactive theatre experiences.
         </HomepageSection.Note>
         <HomepageSection.Note>(I also made this website.)</HomepageSection.Note>
       </HomepageSection>
@@ -152,5 +166,5 @@ function Home() {
         </dl>
       </HomepageSection>
     </div>
-  );
+  )
 }
