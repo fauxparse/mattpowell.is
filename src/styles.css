@@ -23,6 +23,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
+  --color-neutral-50: var(--scheme-neutral-50);
   --color-neutral-100: var(--scheme-neutral-100);
   --color-neutral-200: var(--scheme-neutral-200);
   --color-neutral-300: var(--scheme-neutral-300);
@@ -34,6 +35,7 @@
   --color-neutral-900: var(--scheme-neutral-900);
   --color-neutral-950: var(--scheme-neutral-950);
 
+  --color-accent-50: var(--scheme-accent-50);
   --color-accent-100: var(--scheme-accent-100);
   --color-accent-200: var(--scheme-accent-200);
   --color-accent-300: var(--scheme-accent-300);
@@ -61,6 +63,7 @@
   :root {
     color-scheme: light;
 
+    --scheme-neutral-50: var(--color-stone-50);
     --scheme-neutral-100: var(--color-stone-100);
     --scheme-neutral-200: var(--color-stone-200);
     --scheme-neutral-300: var(--color-stone-300);
@@ -72,6 +75,7 @@
     --scheme-neutral-900: var(--color-stone-900);
     --scheme-neutral-950: var(--color-stone-950);
 
+    --scheme-accent-50: var(--color-orange-50);
     --scheme-accent-100: var(--color-orange-100);
     --scheme-accent-200: var(--color-orange-200);
     --scheme-accent-300: var(--color-orange-300);
@@ -125,7 +129,34 @@
     --link-underline: var(--color-accent-900);
   }
 
+  [data-color-scheme='stone'] {
+    --scheme-neutral-50: var(--color-stone-50);
+    --scheme-neutral-100: var(--color-stone-100);
+    --scheme-neutral-200: var(--color-stone-200);
+    --scheme-neutral-300: var(--color-stone-300);
+    --scheme-neutral-400: var(--color-stone-400);
+    --scheme-neutral-500: var(--color-stone-500);
+    --scheme-neutral-600: var(--color-stone-600);
+    --scheme-neutral-700: var(--color-stone-700);
+    --scheme-neutral-800: var(--color-stone-800);
+    --scheme-neutral-900: var(--color-stone-900);
+    --scheme-neutral-950: var(--color-stone-950);
+
+    --scheme-accent-50: var(--color-orange-50);
+    --scheme-accent-100: var(--color-orange-100);
+    --scheme-accent-200: var(--color-orange-200);
+    --scheme-accent-300: var(--color-orange-300);
+    --scheme-accent-400: var(--color-orange-400);
+    --scheme-accent-500: var(--color-orange-500);
+    --scheme-accent-600: var(--color-orange-600);
+    --scheme-accent-700: var(--color-orange-700);
+    --scheme-accent-800: var(--color-orange-800);
+    --scheme-accent-900: var(--color-orange-900);
+    --scheme-accent-950: var(--color-orange-950);
+  }
+
   [data-color-scheme='slate'] {
+    --scheme-neutral-50: var(--color-slate-50);
     --scheme-neutral-100: var(--color-slate-100);
     --scheme-neutral-200: var(--color-slate-200);
     --scheme-neutral-300: var(--color-slate-300);
@@ -150,6 +181,7 @@
   }
 
   [data-color-scheme='olive'] {
+    --scheme-neutral-50: var(--color-olive-50);
     --scheme-neutral-100: var(--color-olive-100);
     --scheme-neutral-200: var(--color-olive-200);
     --scheme-neutral-300: var(--color-olive-300);
@@ -186,7 +218,7 @@
 }
 
 @utility sketchy {
-  @apply filter-[url(#sketchy)];
+  filter: url(#sketchy);
 }
 
 @utility boil {

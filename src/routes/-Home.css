@@ -6,7 +6,7 @@ html:has(.home) {
   --vertical: min(80vw, 60dvh);
   --big: clamp(2.5rem, 5vw, 5rem);
   --horizontal: calc(50% + var(--big) * 1.5);
-  --gutter: calc(var(--big) * 0.1);
+  --gutter: calc(var(--big) * 0.15);
   --slide-distance: 0.025;
 
   container: home / inline-size;

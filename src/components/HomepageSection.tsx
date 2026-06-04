@@ -11,9 +11,11 @@ const Root = ({
 }: React.PropsWithChildren<HomepageSectionProps>) => {
   const id = kebabCase(title)
   return (
-    <section id={id}>
-      <h2 className="boil">{title}</h2>
-      <div className="content text-balance text-hero text-center text-foreground line-height-2">
+    <section id={id} data-section={id}>
+      <h2 className="boil" style={{ viewTransitionName: id }}>
+        {title}
+      </h2>
+      <div className="content text-balance text-hero text-center text-foreground line-height-2 flex flex-col items-center gap-2">
         {children}
       </div>
     </section>
@@ -21,19 +23,22 @@ const Root = ({
 }
 
 const Paragraph = ({ children }: React.PropsWithChildren) => {
-  return <p className="max-w-[32em] mx-auto mb-[0.25lh]">{children}</p>
+  return <p className="max-w-[32em]">{children}</p>
 }
 
 const Note = ({ children }: React.PropsWithChildren) => {
   return (
-    <p className="max-w-[32em] text-2xl mx-auto text-muted-foreground">
-      {children}
-    </p>
+    <p className="max-w-[32em] text-2xl text-muted-foreground">{children}</p>
   )
+}
+
+const Buttons = ({ children }: React.PropsWithChildren) => {
+  return <div className="flex gap-4 p-2 justify-center">{children}</div>
 }
 
 export const HomepageSection = Object.assign(Root, {
   displayName: 'HomepageSection',
   Paragraph,
   Note,
+  Buttons,
 })
