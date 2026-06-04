@@ -19,13 +19,13 @@ function Home() {
           data-scroll-indicator="down"
         >
           <button
-            className="size-10 grid place-content-center animate-[float_1s_ease-in-out_infinite_alternate] z-20"
+            className="size-10 grid place-content-center animate-[float_1s_ease-in-out_infinite_alternate] drop-shadow-lg z-20"
             aria-label="Scroll down"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 48 48"
-              className="size-10 background-transparent drop-shadow-lg"
+              className="size-10 background-transparent boil"
             >
               <path
                 d="M47.489 26.042q0-5.424-1.835-10.09t-5.065-8.056-7.657-5.305Q28.504.677 23.4.677q-2.633 0-4.826.319-2.194.319-4.028 1.037a15.3 15.3 0 0 0-3.51 1.954q-1.675 1.236-3.35 3.071-2.392 2.553-3.789 4.826-1.396 2.273-2.114 4.028-.878 2.074-1.196 3.749l.478 7.578q.32 4.546 2.034 8.176 1.716 3.629 4.507 6.221 2.792 2.593 6.501 3.989t8.016 1.395q1.835 0 3.869-.757 2.034-.759 4.586-.758h3.43l2.234-1.356q.637-.16 2.473-.997 1.835-.838 3.788-2.832 1.955-1.994 3.47-5.424t1.516-8.854"
@@ -70,7 +70,7 @@ function Home() {
           styles.
         </HomepageSection.Paragraph>
         <HomepageSection.Note>
-          From 2023–2025 I was Artistic Co-Director of{' '}
+          From 2023–2025 I was Artistic Co&#8209;Director of{' '}
           <a
             className="link"
             href="https://improvfest.nz"
@@ -118,7 +118,7 @@ function Home() {
         <HomepageSection.Note>(I also made this website.)</HomepageSection.Note>
       </HomepageSection>
       <HomepageSection title="Available">
-        <dl className="text-hero grid grid-cols-[auto_1fr] w-max mx-auto gap-4 [&>dt]:text-right [&>dt]:text-muted-foreground [&>dt]:small-caps">
+        <dl className="text-hero grid grid-cols-[auto_1fr] w-max mx-auto gap-4 text-left [&>dt]:text-right [&>dt]:text-muted-foreground [&>dt]:small-caps">
           <dt>Email</dt>
           <dd>
             <a

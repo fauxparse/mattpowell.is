@@ -12,7 +12,7 @@ const Root = ({
   const id = kebabCase(title)
   return (
     <section id={id}>
-      <h2>{title}</h2>
+      <h2 className="boil">{title}</h2>
       <div className="content text-balance text-hero text-center text-foreground line-height-2">
         {children}
       </div>

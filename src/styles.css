@@ -23,6 +23,28 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
+  --color-neutral-100: var(--scheme-neutral-100);
+  --color-neutral-200: var(--scheme-neutral-200);
+  --color-neutral-300: var(--scheme-neutral-300);
+  --color-neutral-400: var(--scheme-neutral-400);
+  --color-neutral-500: var(--scheme-neutral-500);
+  --color-neutral-600: var(--scheme-neutral-600);
+  --color-neutral-700: var(--scheme-neutral-700);
+  --color-neutral-800: var(--scheme-neutral-800);
+  --color-neutral-900: var(--scheme-neutral-900);
+  --color-neutral-950: var(--scheme-neutral-950);
+
+  --color-accent-100: var(--scheme-accent-100);
+  --color-accent-200: var(--scheme-accent-200);
+  --color-accent-300: var(--scheme-accent-300);
+  --color-accent-400: var(--scheme-accent-400);
+  --color-accent-500: var(--scheme-accent-500);
+  --color-accent-600: var(--scheme-accent-600);
+  --color-accent-700: var(--scheme-accent-700);
+  --color-accent-800: var(--scheme-accent-800);
+  --color-accent-900: var(--scheme-accent-900);
+  --color-accent-950: var(--scheme-accent-950);
+
   --font-sans: 'Providence Sans', ui-sans-serif, system-ui, sans-serif;
   --font-heading: 'Providence Sans', ui-sans-serif, system-ui, sans-serif;
   --color-background: var(--background);
@@ -33,33 +55,33 @@
   --text-hero: clamp(0.875rem, 5vw, 2rem);
   --color-link: var(--link);
   --color-link-underline: var(--link-underline);
-
-  --color-neutral-100: var(--color-stone-100);
-  --color-neutral-200: var(--color-stone-200);
-  --color-neutral-300: var(--color-stone-300);
-  --color-neutral-400: var(--color-stone-400);
-  --color-neutral-500: var(--color-stone-500);
-  --color-neutral-600: var(--color-stone-600);
-  --color-neutral-700: var(--color-stone-700);
-  --color-neutral-800: var(--color-stone-800);
-  --color-neutral-900: var(--color-stone-900);
-  --color-neutral-950: var(--color-stone-950);
-
-  --color-accent-100: var(--color-orange-100);
-  --color-accent-200: var(--color-orange-200);
-  --color-accent-300: var(--color-orange-300);
-  --color-accent-400: var(--color-orange-400);
-  --color-accent-500: var(--color-orange-500);
-  --color-accent-600: var(--color-orange-600);
-  --color-accent-700: var(--color-orange-700);
-  --color-accent-800: var(--color-orange-800);
-  --color-accent-900: var(--color-orange-900);
-  --color-accent-950: var(--color-orange-950);
 }
 
 @layer theme {
   :root {
     color-scheme: light;
+
+    --scheme-neutral-100: var(--color-stone-100);
+    --scheme-neutral-200: var(--color-stone-200);
+    --scheme-neutral-300: var(--color-stone-300);
+    --scheme-neutral-400: var(--color-stone-400);
+    --scheme-neutral-500: var(--color-stone-500);
+    --scheme-neutral-600: var(--color-stone-600);
+    --scheme-neutral-700: var(--color-stone-700);
+    --scheme-neutral-800: var(--color-stone-800);
+    --scheme-neutral-900: var(--color-stone-900);
+    --scheme-neutral-950: var(--color-stone-950);
+
+    --scheme-accent-100: var(--color-orange-100);
+    --scheme-accent-200: var(--color-orange-200);
+    --scheme-accent-300: var(--color-orange-300);
+    --scheme-accent-400: var(--color-orange-400);
+    --scheme-accent-500: var(--color-orange-500);
+    --scheme-accent-600: var(--color-orange-600);
+    --scheme-accent-700: var(--color-orange-700);
+    --scheme-accent-800: var(--color-orange-800);
+    --scheme-accent-900: var(--color-orange-900);
+    --scheme-accent-950: var(--color-orange-950);
 
     --background: var(--color-neutral-100);
     --background-gradient-dark: var(--color-neutral-400);
@@ -103,6 +125,54 @@
     --link-underline: var(--color-accent-900);
   }
 
+  [data-color-scheme='slate'] {
+    --scheme-neutral-100: var(--color-slate-100);
+    --scheme-neutral-200: var(--color-slate-200);
+    --scheme-neutral-300: var(--color-slate-300);
+    --scheme-neutral-400: var(--color-slate-400);
+    --scheme-neutral-500: var(--color-slate-500);
+    --scheme-neutral-600: var(--color-slate-600);
+    --scheme-neutral-700: var(--color-slate-700);
+    --scheme-neutral-800: var(--color-slate-800);
+    --scheme-neutral-900: var(--color-slate-900);
+    --scheme-neutral-950: var(--color-slate-950);
+
+    --scheme-accent-100: var(--color-rose-100);
+    --scheme-accent-200: var(--color-rose-200);
+    --scheme-accent-300: var(--color-rose-300);
+    --scheme-accent-400: var(--color-rose-400);
+    --scheme-accent-500: var(--color-rose-500);
+    --scheme-accent-600: var(--color-rose-600);
+    --scheme-accent-700: var(--color-rose-700);
+    --scheme-accent-800: var(--color-rose-800);
+    --scheme-accent-900: var(--color-rose-900);
+    --scheme-accent-950: var(--color-rose-950);
+  }
+
+  [data-color-scheme='olive'] {
+    --scheme-neutral-100: var(--color-olive-100);
+    --scheme-neutral-200: var(--color-olive-200);
+    --scheme-neutral-300: var(--color-olive-300);
+    --scheme-neutral-400: var(--color-olive-400);
+    --scheme-neutral-500: var(--color-olive-500);
+    --scheme-neutral-600: var(--color-olive-600);
+    --scheme-neutral-700: var(--color-olive-700);
+    --scheme-neutral-800: var(--color-olive-800);
+    --scheme-neutral-900: var(--color-olive-900);
+    --scheme-neutral-950: var(--color-olive-950);
+
+    --scheme-accent-100: var(--color-yellow-100);
+    --scheme-accent-200: var(--color-yellow-200);
+    --scheme-accent-300: var(--color-yellow-300);
+    --scheme-accent-400: var(--color-yellow-400);
+    --scheme-accent-500: var(--color-yellow-500);
+    --scheme-accent-600: var(--color-yellow-600);
+    --scheme-accent-700: var(--color-yellow-700);
+    --scheme-accent-800: var(--color-yellow-800);
+    --scheme-accent-900: var(--color-yellow-900);
+    --scheme-accent-950: var(--color-yellow-950);
+  }
+
   @media (prefers-color-scheme: dark) {
     :root:not(.light) {
       color-scheme: dark;
@@ -115,6 +185,15 @@
   text-transform: lowercase;
 }
 
+@utility sketchy {
+  @apply filter-[url(#sketchy)];
+}
+
+@utility boil {
+  @apply sketchy;
+  @apply motion-safe:filter-[url(#boil)];
+}
+
 @utility link {
   color: var(--color-link);
   text-decoration: underline;
@@ -122,6 +201,9 @@
   text-decoration-style: solid;
   text-decoration-color: var(--color-link-underline);
   text-underline-offset: 0.25em;
+  &:hover {
+    @apply boil;
+  }
 }
 
 @layer base {

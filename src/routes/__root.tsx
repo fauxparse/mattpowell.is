@@ -4,6 +4,8 @@ import { TanStackDevtools } from '@tanstack/react-devtools'
 
 import { ThemeToggle } from '../components/ThemeToggle'
 import appCss from '../styles.css?url'
+import { BoilFilter } from '#/components/BoilFilter.tsx'
+import { ColorScheme } from '#/components/ColorScheme.tsx'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -39,6 +41,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
+        <BoilFilter />
+        <ColorScheme scheme="slate" />
         <ThemeToggle />
         {children}
         <TanStackDevtools

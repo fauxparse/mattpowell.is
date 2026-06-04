@@ -56,6 +56,9 @@ importers:
       tailwindcss:
         specifier: ^4.1.18
         version: 4.3.0
+      ts-matrix:
+        specifier: ^1.5.0
+        version: 1.5.0
     devDependencies:
       '@tailwindcss/typography':
         specifier: ^0.5.16
@@ -1875,6 +1878,9 @@ packages:
   tr46@6.0.0:
     resolution: {integrity: sha512-bLVMLPtstlZ4iMQHpFHTR7GAGj2jxi8Dg0s2h2MafAE4uSWF98FC/3MomU51iQAMf8/qDUbKWf5GxuvvVcXEhw==}
     engines: {node: '>=20'}
+
+  ts-matrix@1.5.0:
+    resolution: {integrity: sha512-WeNuA6Uu2TjSYB5cYnNfwIKaAJ2XO9uzadmQBkzW4oV2Ub4BRwWszyWNw1elsICqUB2Sv6BSObArDzsD5bNfbg==}
 
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
@@ -3697,6 +3703,8 @@ snapshots:
   tr46@6.0.0:
     dependencies:
       punycode: 2.3.1
+
+  ts-matrix@1.5.0: {}
 
   tslib@2.8.1:
     optional: true
