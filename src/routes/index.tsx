@@ -117,7 +117,7 @@ function Home() {
         <HomepageSection.Note>(I also made this website.)</HomepageSection.Note>
       </HomepageSection>
       <HomepageSection title="Available">
-        <dl className="text-hero grid grid-cols-[auto_1fr] w-max mx-auto gap-4 text-left [&>dt]:text-right [&>dt]:text-muted-foreground [&>dt]:small-caps">
+        <dl className="text-hero grid grid-cols-[auto_1fr] w-max mx-auto gap-4 mb-4 text-left [&>dt]:text-right [&>dt]:text-muted-foreground [&>dt]:small-caps">
           <dt>Email</dt>
           <dd>
             <a
@@ -164,11 +164,19 @@ function Home() {
           </dd>
         </dl>
         <HomepageSection.Note>
-          Need a bio or photos? Check out my{' '}
-          <Link to="/me" className="link">
-            media kit
+          <Link
+            to="/me"
+            className="lg:absolute lg:top-[15%] lg:left-[60%] lg:sticker lg:rotate-5"
+          >
+            <b></b>
+            <span>
+              Need a bio or photos? Check out my{' '}
+              <span className="link cursor-pointer lg:text-inherit lg:no-underline lg:hover:filter-none">
+                media kit
+              </span>
+              !
+            </span>
           </Link>
-          !
         </HomepageSection.Note>
       </HomepageSection>
       <div

@@ -15,7 +15,7 @@ const Root = ({
       <h2 className="boil" style={{ viewTransitionName: id }}>
         {title}
       </h2>
-      <div className="content text-balance text-hero text-center text-foreground line-height-2 flex flex-col items-center gap-2">
+      <div className="content relative text-balance text-hero text-center text-foreground line-height-2 flex flex-col items-center gap-2">
         {children}
       </div>
     </section>

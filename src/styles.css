@@ -78,32 +78,32 @@
   :root {
     color-scheme: light;
 
-    --scheme-neutral-50: var(--color-stone-50);
-    --scheme-neutral-100: var(--color-stone-100);
-    --scheme-neutral-200: var(--color-stone-200);
-    --scheme-neutral-300: var(--color-stone-300);
-    --scheme-neutral-400: var(--color-stone-400);
-    --scheme-neutral-500: var(--color-stone-500);
-    --scheme-neutral-600: var(--color-stone-600);
-    --scheme-neutral-700: var(--color-stone-700);
-    --scheme-neutral-800: var(--color-stone-800);
-    --scheme-neutral-900: var(--color-stone-900);
-    --scheme-neutral-950: var(--color-stone-950);
+    --scheme-neutral-50: var(--color-slate-50);
+    --scheme-neutral-100: var(--color-slate-100);
+    --scheme-neutral-200: var(--color-slate-200);
+    --scheme-neutral-300: var(--color-slate-300);
+    --scheme-neutral-400: var(--color-slate-400);
+    --scheme-neutral-500: var(--color-slate-500);
+    --scheme-neutral-600: var(--color-slate-600);
+    --scheme-neutral-700: var(--color-slate-700);
+    --scheme-neutral-800: var(--color-slate-800);
+    --scheme-neutral-900: var(--color-slate-900);
+    --scheme-neutral-950: var(--color-slate-950);
 
-    --scheme-accent-50: var(--color-orange-50);
-    --scheme-accent-100: var(--color-orange-100);
-    --scheme-accent-200: var(--color-orange-200);
-    --scheme-accent-300: var(--color-orange-300);
-    --scheme-accent-400: var(--color-orange-400);
-    --scheme-accent-500: var(--color-orange-500);
-    --scheme-accent-600: var(--color-orange-600);
-    --scheme-accent-700: var(--color-orange-700);
-    --scheme-accent-800: var(--color-orange-800);
-    --scheme-accent-900: var(--color-orange-900);
-    --scheme-accent-950: var(--color-orange-950);
+    --scheme-accent-50: var(--color-rose-50);
+    --scheme-accent-100: var(--color-rose-100);
+    --scheme-accent-200: var(--color-rose-200);
+    --scheme-accent-300: var(--color-rose-300);
+    --scheme-accent-400: var(--color-rose-400);
+    --scheme-accent-500: var(--color-rose-500);
+    --scheme-accent-600: var(--color-rose-600);
+    --scheme-accent-700: var(--color-rose-700);
+    --scheme-accent-800: var(--color-rose-800);
+    --scheme-accent-900: var(--color-rose-900);
+    --scheme-accent-950: var(--color-rose-950);
 
     --background: var(--color-neutral-100);
-    --background-gradient-dark: var(--color-neutral-400);
+    --background-gradient-dark: var(--color-neutral-300);
     --foreground: var(--color-neutral-900);
     --muted: var(--color-neutral-200);
     --muted-foreground: var(--color-neutral-600);
@@ -113,7 +113,7 @@
     --input: var(--color-neutral-300);
 
     --portrait-outline: var(--color-neutral-800);
-    --portrait-hair: var(--color-neutral-950);
+    --portrait-hair: var(--color-neutral-700);
     --portrait-light: var(--color-neutral-600);
     --portrait-lighter: var(--color-neutral-200);
     --portrait-lightest: var(--color-neutral-100);
@@ -138,7 +138,7 @@
     --muted-foreground: var(--color-neutral-400);
     --border: var(--color-neutral-600);
     --portrait-outline: var(--color-neutral-900);
-    --portrait-hair: var(--color-neutral-950);
+    --portrait-hair: var(--color-neutral-800);
     --portrait-light: var(--color-neutral-600);
     --portrait-lighter: var(--color-neutral-400);
     --portrait-lightest: var(--color-neutral-300);
@@ -152,7 +152,7 @@
     --selection-foreground: var(--color-accent-100);
 
     --link: var(--color-accent-500);
-    --link-underline: var(--color-accent-900);
+    --link-underline: var(--color-accent-700);
     --ring: var(--color-accent-500);
   }
 
@@ -195,6 +195,7 @@
     --scheme-neutral-900: var(--color-slate-900);
     --scheme-neutral-950: var(--color-slate-950);
 
+    --scheme-accent-50: var(--color-rose-50);
     --scheme-accent-100: var(--color-rose-100);
     --scheme-accent-200: var(--color-rose-200);
     --scheme-accent-300: var(--color-rose-300);
@@ -220,6 +221,7 @@
     --scheme-neutral-900: var(--color-olive-900);
     --scheme-neutral-950: var(--color-olive-950);
 
+    --scheme-accent-50: var(--color-yellow-50);
     --scheme-accent-100: var(--color-yellow-100);
     --scheme-accent-200: var(--color-yellow-200);
     --scheme-accent-300: var(--color-yellow-300);
@@ -279,6 +281,34 @@
     background-color: var(--color-panel-background);
     z-index: -1;
     @apply sketchy;
+  }
+}
+
+@utility sticker {
+  > b {
+    @apply panel absolute inset-0;
+    @apply sketchy -z-1;
+
+    &::before {
+      @apply rounded-full;
+      background: radial-gradient(
+          circle at 77% 126%,
+          var(--color-accent-300) 29%,
+          var(--color-accent-600) 29%,
+          transparent 31%
+        )
+        var(--color-accent-500);
+      @apply mask-linear-160 mask-linear-from-85% mask-linear-to-0%;
+      filter: none;
+    }
+  }
+
+  @apply p-8 z-50 aspect-square text-accent-50 flex items-center justify-center w-48 h-48 text-[1.25rem] relative drop-shadow-lg;
+
+  &:hover {
+    b {
+      @apply boil;
+    }
   }
 }
 
