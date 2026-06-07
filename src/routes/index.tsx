@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { Portrait } from '#/components/Portrait.tsx'
+import { Portrait } from '@/components/Portrait.tsx'
 
 import './-Home.css'
-import { HomepageSection } from '#/components/HomepageSection.tsx'
+import { HomepageSection } from '@/components/HomepageSection.tsx'
 import { useCallback } from 'react'
 
 export const Route = createFileRoute('/')({ component: Home })
@@ -163,6 +163,13 @@ function Home() {
             </a>
           </dd>
         </dl>
+        <HomepageSection.Note>
+          Need a bio or photos? Check out my{' '}
+          <Link to="/me" className="link">
+            media kit
+          </Link>
+          !
+        </HomepageSection.Note>
       </HomepageSection>
       <div
         className="fixed bottom-4 left-1/2 size-10 -translate-1/2"

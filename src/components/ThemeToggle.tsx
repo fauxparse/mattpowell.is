@@ -17,13 +17,13 @@ export function ThemeToggle() {
     <>
       <button
         type="button"
-        className="fixed top-4 right-4 z-1000 pointer-events-auto md:hidden"
+        className="fixed top-4 right-4 z-1000 pointer-events-auto sketchy xl:hidden"
         onClick={() => setTheme(toggleTheme())}
       >
         <Icon className="w-4 h-4" />
       </button>
       <PullChain
-        className="hidden z-1000 md:block"
+        className="hidden z-1000 xl:block"
         position="-10%"
         color="var(--color-muted-foreground)"
         checked={theme === 'dark'}

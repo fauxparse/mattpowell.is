@@ -4,8 +4,8 @@ import { TanStackDevtools } from '@tanstack/react-devtools'
 
 import { ThemeToggle } from '../components/ThemeToggle'
 import appCss from '../styles.css?url'
-import { BoilFilter } from '#/components/BoilFilter.tsx'
-import { ColorScheme } from '#/components/ColorScheme.tsx'
+import { BoilFilter } from '@/components/BoilFilter.tsx'
+import { ColorScheme } from '@/components/ColorScheme.tsx'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -25,6 +25,31 @@ export const Route = createRootRoute({
       {
         rel: 'stylesheet',
         href: appCss,
+      },
+      {
+        rel: 'icon',
+        href: '/favicon.svg',
+        type: 'image/svg+xml',
+      },
+      {
+        rel: 'icon',
+        href: '/favicon-32x32.png',
+        sizes: '32x32',
+        type: 'image/png',
+      },
+      {
+        rel: 'icon',
+        href: '/favicon-16x16.png',
+        sizes: '16x16',
+        type: 'image/png',
+      },
+      {
+        rel: 'apple-touch-icon',
+        href: '/apple-touch-icon.png',
+      },
+      {
+        rel: 'manifest',
+        href: '/manifest.json',
       },
     ],
   }),

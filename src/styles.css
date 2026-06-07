@@ -19,6 +19,7 @@
 }
 
 @import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -48,15 +49,29 @@
   --color-accent-950: var(--scheme-accent-950);
 
   --font-sans: 'Providence Sans', ui-sans-serif, system-ui, sans-serif;
-  --font-heading: 'Providence Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-sans);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
+  --color-panel-background: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  --color-panel-inverse: var(--panel-inverse);
+  --color-panel-inverse-foreground: var(--panel-inverse-foreground);
   --color-border: var(--border);
   --text-hero: clamp(0.875rem, 5vw, 2rem);
   --color-link: var(--link);
   --color-link-underline: var(--link-underline);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-primary: var(--color-accent-500);
+  --color-primary-foreground: var(--color-accent-100);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
 @layer theme {
@@ -92,7 +107,10 @@
     --foreground: var(--color-neutral-900);
     --muted: var(--color-neutral-200);
     --muted-foreground: var(--color-neutral-600);
+    --panel-inverse: var(--color-neutral-300);
+    --panel-inverse-foreground: var(--color-neutral-800);
     --border: var(--color-neutral-300);
+    --input: var(--color-neutral-300);
 
     --portrait-outline: var(--color-neutral-800);
     --portrait-hair: var(--color-neutral-950);
@@ -105,6 +123,9 @@
 
     --link: var(--color-accent-600);
     --link-underline: var(--color-accent-200);
+    --ring: var(--color-accent-500);
+
+    --radius: 1rem;
   }
 
   .dark {
@@ -122,11 +143,17 @@
     --portrait-lighter: var(--color-neutral-400);
     --portrait-lightest: var(--color-neutral-300);
 
+    --panel-inverse: var(--color-neutral-200);
+    --panel-inverse-foreground: var(--color-neutral-800);
+
+    --input: var(--color-neutral-900);
+
     --selection-background: var(--color-accent-900);
     --selection-foreground: var(--color-accent-100);
 
     --link: var(--color-accent-500);
     --link-underline: var(--color-accent-900);
+    --ring: var(--color-accent-500);
   }
 
   [data-color-scheme='stone'] {
@@ -238,9 +265,41 @@
   }
 }
 
+@utility panel {
+  position: relative;
+  color: var(--color-panel-foreground);
+  @apply rounded-lg;
+  @apply p-4;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-color: var(--color-panel-background);
+    z-index: -1;
+    @apply sketchy;
+  }
+}
+
+::view-transition-group(image-card-backdrop) {
+  z-index: 500;
+}
+
+::view-transition-group(selected-image-card) {
+  z-index: 510;
+}
+
+@utility panel-inverse {
+  @apply panel;
+  --color-panel-background: var(--color-panel-inverse);
+  --color-panel-foreground: var(--color-panel-inverse-foreground);
+}
+
 @layer base {
   * {
     box-sizing: border-box;
+    @apply border-border outline-ring/50;
   }
 
   ::selection {
@@ -258,6 +317,7 @@
     margin: 0;
     background-color: var(--background);
     color: var(--foreground);
+    @apply bg-background text-foreground;
   }
 
   abbr {
@@ -273,5 +333,8 @@
     font-family: var(--font-heading);
     font-weight: 600;
     text-transform: uppercase;
+  }
+  html {
+    @apply font-sans;
   }
 }
