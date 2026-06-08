@@ -1,13 +1,19 @@
 import { useEffect } from 'react'
+import {
+  getResolvedScheme,
+  applyScheme,
+  type Scheme,
+  SCHEMES,
+} from '../lib/theme'
 
-const SCHEMES = ['stone', 'slate', 'olive'] as const
-
-type Scheme = (typeof SCHEMES)[number]
-
-export function ColorScheme({ scheme }: { scheme: Scheme }) {
+export function ColorScheme({ scheme }: { scheme?: Scheme }) {
   useEffect(() => {
-    document.documentElement.setAttribute('data-color-scheme', scheme)
+    const resolved = scheme ?? getResolvedScheme()
+    // ensure the attribute and storage are set on mount and when scheme changes
+    applyScheme(resolved)
   }, [scheme])
 
   return null
 }
+
+export { SCHEMES as COLOR_SCHEMES }

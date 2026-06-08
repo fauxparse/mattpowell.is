@@ -5,7 +5,6 @@ import { TanStackDevtools } from '@tanstack/react-devtools'
 import { ThemeToggle } from '../components/ThemeToggle'
 import appCss from '../styles.css?url'
 import { BoilFilter } from '@/components/BoilFilter.tsx'
-import { ColorScheme } from '@/components/ColorScheme.tsx'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -56,7 +55,7 @@ export const Route = createRootRoute({
   shellComponent: RootDocument,
 })
 
-const themeInitScript = `(function(){try{var t=localStorage.getItem('theme');var d=t==='dark'||(t!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d);document.documentElement.classList.toggle('light',t==='light')}catch(e){}})();`
+const themeInitScript = `(function(){try{var t=localStorage.getItem('theme');var s=localStorage.getItem('color-scheme')||'slate';var d=t==='dark'||(t!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d);document.documentElement.classList.toggle('light',t==='light');document.documentElement.setAttribute('data-color-scheme',s)}catch(e){}})();`
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
@@ -67,7 +66,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <BoilFilter />
-        <ColorScheme scheme="slate" />
         <ThemeToggle />
         {children}
         <TanStackDevtools
