@@ -4,6 +4,7 @@ import { Portrait } from '@/components/Portrait.tsx'
 import './-Home.css'
 import { HomepageSection } from '@/components/HomepageSection.tsx'
 import { useCallback } from 'react'
+import { Footer } from '#/components/Footer.tsx'
 
 export const Route = createFileRoute('/')({ component: Home })
 
@@ -180,7 +181,7 @@ function Home() {
         </HomepageSection.Note>
       </HomepageSection>
       <div
-        className="fixed bottom-4 left-1/2 size-10 -translate-1/2"
+        className="fixed bottom-4 left-1/2 size-10 -translate-1/2 z-100"
         data-scroll-indicator="down"
       >
         <button
@@ -203,6 +204,9 @@ function Home() {
             />
           </svg>
         </button>
+      </div>
+      <div className="fixed right-0 bottom-0 left-0 @container">
+        <Footer className="w-[calc(min(var(--container-5xl),100%)-2rem)] mx-auto" />
       </div>
     </div>
   )

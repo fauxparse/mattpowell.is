@@ -5,6 +5,8 @@ import { TanStackDevtools } from '@tanstack/react-devtools'
 import { ThemeToggle } from '../components/ThemeToggle'
 import appCss from '../styles.css?url'
 import { BoilFilter } from '@/components/BoilFilter.tsx'
+import { themeInitScript } from '@/lib/theme.ts'
+import { ThemeProvider } from '@/components/ThemeProvider.tsx'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -55,8 +57,6 @@ export const Route = createRootRoute({
   shellComponent: RootDocument,
 })
 
-const themeInitScript = `(function(){try{var t=localStorage.getItem('theme');var s=localStorage.getItem('color-scheme')||'slate';var d=t==='dark'||(t!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d);document.documentElement.classList.toggle('light',t==='light');document.documentElement.setAttribute('data-color-scheme',s)}catch(e){}})();`
-
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -65,12 +65,14 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        <BoilFilter />
-        <ThemeToggle />
-        {children}
+        <ThemeProvider>
+          <BoilFilter />
+          <ThemeToggle />
+          {children}
+        </ThemeProvider>
         <TanStackDevtools
           config={{
-            position: 'bottom-right',
+            position: 'bottom-left',
           }}
           plugins={[
             {
