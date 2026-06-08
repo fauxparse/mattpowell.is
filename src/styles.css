@@ -320,6 +320,28 @@
   z-index: 510;
 }
 
+:root.theme-view-transition::view-transition-old(root),
+:root.theme-view-transition::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+:root.theme-view-transition::view-transition-old(root) {
+  z-index: 0;
+}
+
+:root.theme-view-transition::view-transition-new(root) {
+  animation: theme-wipe-in 300ms ease-out both;
+  clip-path: inset(0 100% 0 0);
+  z-index: 1;
+}
+
+@keyframes theme-wipe-in {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
 @utility panel-inverse {
   @apply panel;
   --color-panel-background: var(--color-panel-inverse);
