@@ -9,13 +9,26 @@ import {
 import { cn } from '../lib/utils'
 
 class Vec2 {
-  constructor(readonly x: number, readonly y: number) {}
-  add(o: Vec2) { return new Vec2(this.x + o.x, this.y + o.y) }
-  subtract(o: Vec2) { return new Vec2(this.x - o.x, this.y - o.y) }
-  scale(f: number) { return new Vec2(this.x * f, this.y * f) }
-  length() { return Math.sqrt(this.x * this.x + this.y * this.y) }
-  normalize() { const l = this.length(); return l === 0 ? this : this.scale(1 / l) }
-  at(i: number) { return i === 0 ? this.x : this.y }
+  constructor(
+    readonly x: number,
+    readonly y: number,
+  ) {}
+  add(o: Vec2) {
+    return new Vec2(this.x + o.x, this.y + o.y)
+  }
+  subtract(o: Vec2) {
+    return new Vec2(this.x - o.x, this.y - o.y)
+  }
+  scale(f: number) {
+    return new Vec2(this.x * f, this.y * f)
+  }
+  length() {
+    return Math.sqrt(this.x * this.x + this.y * this.y)
+  }
+  normalize() {
+    const l = this.length()
+    return l === 0 ? this : this.scale(1 / l)
+  }
 }
 
 type Position = number | `${number}%` | 'center'
@@ -89,7 +102,7 @@ export const PullChain = ({
         .normalize()
         .scale(ringRadius)
         .add(tail.position)
-      ringElement.current.style.transform = `translate(${c.at(0)}px, ${c.at(1)}px)`
+      ringElement.current.style.transform = `translate(${c.x}px, ${c.y}px)`
     }
   }, [])
 
@@ -252,11 +265,7 @@ function getSvgPointerPosition(svg: SVGSVGElement, event: PointerEvent) {
   return new Vec2(point.x, point.y)
 }
 
-function applyDragResistance(
-  anchor: Vec2,
-  pointer: Vec2,
-  freeLength: number,
-) {
+function applyDragResistance(anchor: Vec2, pointer: Vec2, freeLength: number) {
   const displacement = pointer.subtract(anchor)
   const distance = displacement.length()
   if (distance === 0 || distance <= freeLength) return pointer
@@ -320,11 +329,11 @@ class Particle {
   }
 
   get x() {
-    return this.position.at(0)
+    return this.position.x
   }
 
   get y() {
-    return this.position.at(1)
+    return this.position.y
   }
 
   lock() {
@@ -481,7 +490,7 @@ function smoothPathPoints(points: Vec2[], passes: number) {
 }
 
 function pointToString(point: Vec2) {
-  return `${point.at(0)},${point.at(1)}`
+  return `${point.x},${point.y}`
 }
 
 function parsePosition(position: Position, width: number) {
