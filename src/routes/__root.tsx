@@ -7,7 +7,7 @@ import { BoilFilter } from '@/components/BoilFilter.tsx'
 import { ThemeProvider } from '@/components/ThemeProvider.tsx'
 
 const BASE_URL = 'https://mattpowell.is'
-const OG_IMAGE = `${BASE_URL}/photos/matt-powell-dark-landscape-1280w.jpg`
+const OG_IMAGE = `${BASE_URL}/photos/matt-powell-og.jpg`
 const DEFAULT_DESCRIPTION =
   'Matt Powell — performer, artist, and developer based in Wellington, Aotearoa New Zealand.'
 
