@@ -7,6 +7,8 @@ import appCss from '../styles.css?url'
 import { BoilFilter } from '@/components/BoilFilter.tsx'
 import { themeInitScript } from '@/lib/theme.ts'
 import { ThemeProvider } from '@/components/ThemeProvider.tsx'
+import fontRegularUrl from '../assets/fonts/providence-sans-regular.woff2?url'
+import fontBoldUrl from '../assets/fonts/providence-sans-bold.woff2?url'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -51,6 +53,20 @@ export const Route = createRootRoute({
       {
         rel: 'manifest',
         href: '/manifest.json',
+      },
+      {
+        rel: 'preload',
+        href: fontRegularUrl,
+        as: 'font',
+        type: 'font/woff2',
+        crossOrigin: 'anonymous',
+      },
+      {
+        rel: 'preload',
+        href: fontBoldUrl,
+        as: 'font',
+        type: 'font/woff2',
+        crossOrigin: 'anonymous',
       },
     ],
   }),
