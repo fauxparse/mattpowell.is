@@ -1,8 +1,10 @@
-import { SectionPage } from '@/components/SectionPage.tsx'
 import { createFileRoute } from '@tanstack/react-router'
+import { lazy } from 'react'
+
+const ImprovisingPage = lazy(() => import('./-improvising.component'))
 
 export const Route = createFileRoute('/improvising')({
-  component: RouteComponent,
+  component: ImprovisingPage,
   head: () => ({
     meta: [
       {
@@ -11,11 +13,3 @@ export const Route = createFileRoute('/improvising')({
     ],
   }),
 })
-
-function RouteComponent() {
-  return (
-    <SectionPage title="improvising">
-      <p>Improvising</p>
-    </SectionPage>
-  )
-}
