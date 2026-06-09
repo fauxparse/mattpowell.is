@@ -421,14 +421,16 @@ class Chain {
     }
   }
 
-  update(dt: number) {
-    for (const spring of this.springs) {
-      spring.applyForces()
-    }
-
+  update(dt: number, substeps = 8) {
+    const subDt = dt / substeps
     let maxMovement = 0
-    for (const particle of this.particles) {
-      maxMovement = Math.max(maxMovement, particle.update(dt))
+    for (let i = 0; i < substeps; i++) {
+      for (const spring of this.springs) {
+        spring.applyForces()
+      }
+      for (const particle of this.particles) {
+        maxMovement = Math.max(maxMovement, particle.update(subDt))
+      }
     }
     return maxMovement
   }
