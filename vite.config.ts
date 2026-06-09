@@ -6,22 +6,21 @@ import tailwindcss from '@tailwindcss/vite'
 
 const config = defineConfig({
   resolve: { tsconfigPaths: true },
-  plugins: [
-    devtools(),
-    tailwindcss(),
-    viteReact(),
-  ],
-  preview: {
-    middlewareMode: true,
-  },
+  plugins: [devtools(), tailwindcss(), viteReact()],
   build: {
     rolldownOptions: {
       output: {
         manualChunks: (id) => {
-          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
+          if (
+            id.includes('node_modules/react') ||
+            id.includes('node_modules/react-dom')
+          ) {
             return 'react'
           }
-          if (id.includes('node_modules/@tanstack/react-router') || id.includes('node_modules/@tanstack/router')) {
+          if (
+            id.includes('node_modules/@tanstack/react-router') ||
+            id.includes('node_modules/@tanstack/router')
+          ) {
             return 'router'
           }
         },
