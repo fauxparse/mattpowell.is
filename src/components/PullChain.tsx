@@ -5,8 +5,18 @@ import {
   useState,
   type ComponentProps,
 } from 'react'
-import { Vector } from 'ts-matrix'
+
 import { cn } from '../lib/utils'
+
+class Vec2 {
+  constructor(readonly x: number, readonly y: number) {}
+  add(o: Vec2) { return new Vec2(this.x + o.x, this.y + o.y) }
+  subtract(o: Vec2) { return new Vec2(this.x - o.x, this.y - o.y) }
+  scale(f: number) { return new Vec2(this.x * f, this.y * f) }
+  length() { return Math.sqrt(this.x * this.x + this.y * this.y) }
+  normalize() { const l = this.length(); return l === 0 ? this : this.scale(1 / l) }
+  at(i: number) { return i === 0 ? this.x : this.y }
+}
 
 type Position = number | `${number}%` | 'center'
 
@@ -161,7 +171,7 @@ export const PullChain = ({
           )
           tail.lock()
           tail.position = switchNotch.position
-          tail.velocity = new Vector([0, 0])
+          tail.velocity = new Vec2(0, 0)
           draw()
 
           if (switchNotch.crossed) {
@@ -222,7 +232,7 @@ export const PullChain = ({
 
 const particleDamping = 0.99
 const maxDeltaTime = 1 / 30
-const gravity = new Vector([0, 980])
+const gravity = new Vec2(0, 980)
 const dragResistanceLength = 420
 const switchThresholdMultiplier = 2
 const switchNotchWidth = 24
@@ -239,12 +249,12 @@ function getSvgPointerPosition(svg: SVGSVGElement, event: PointerEvent) {
   const point = new DOMPoint(event.clientX, event.clientY).matrixTransform(
     screenMatrix.inverse(),
   )
-  return new Vector([point.x, point.y])
+  return new Vec2(point.x, point.y)
 }
 
 function applyDragResistance(
-  anchor: Vector,
-  pointer: Vector,
+  anchor: Vec2,
+  pointer: Vec2,
   freeLength: number,
 ) {
   const displacement = pointer.subtract(anchor)
@@ -259,8 +269,8 @@ function applyDragResistance(
 }
 
 function applySwitchNotch(
-  anchor: Vector,
-  position: Vector,
+  anchor: Vec2,
+  position: Vec2,
   threshold: number,
   tripped: boolean,
 ) {
@@ -296,16 +306,16 @@ function smoothstep(value: number) {
 }
 
 class Particle {
-  position: Vector
-  velocity: Vector
-  acceleration: Vector
+  position: Vec2
+  velocity: Vec2
+  acceleration: Vec2
   locked = false
   mass: number
 
   constructor(x: number, y: number, mass = 1.5) {
-    this.position = new Vector([x, y])
-    this.velocity = new Vector([0, 0])
-    this.acceleration = new Vector([0, 0])
+    this.position = new Vec2(x, y)
+    this.velocity = new Vec2(0, 0)
+    this.acceleration = new Vec2(0, 0)
     this.mass = mass
   }
 
@@ -327,14 +337,14 @@ class Particle {
     return this
   }
 
-  applyForce(force: Vector) {
+  applyForce(force: Vec2) {
     if (this.locked) return
     this.acceleration = this.acceleration.add(force.scale(1 / this.mass))
   }
 
   update(dt: number) {
     if (this.locked) {
-      this.acceleration = new Vector([0, 0])
+      this.acceleration = new Vec2(0, 0)
       return 0
     }
 
@@ -343,7 +353,7 @@ class Particle {
       .add(this.acceleration.add(gravity).scale(dt))
       .scale(Math.exp(-particleDamping * dt))
     this.position = this.position.add(this.velocity.scale(dt))
-    this.acceleration = new Vector([0, 0])
+    this.acceleration = new Vec2(0, 0)
     return this.position.subtract(previousPosition).length()
   }
 
@@ -416,8 +426,8 @@ class Chain {
 
   makeStatic() {
     for (const particle of this.particles) {
-      particle.velocity = new Vector([0, 0])
-      particle.acceleration = new Vector([0, 0])
+      particle.velocity = new Vec2(0, 0)
+      particle.acceleration = new Vec2(0, 0)
     }
   }
 
@@ -453,7 +463,7 @@ class Chain {
 
 const initialChainPath = new Chain(0, 0, 200).path
 
-function smoothPathPoints(points: Vector[], passes: number) {
+function smoothPathPoints(points: Vec2[], passes: number) {
   let smoothed = points
 
   for (let pass = 0; pass < passes; pass++) {
@@ -470,7 +480,7 @@ function smoothPathPoints(points: Vector[], passes: number) {
   return smoothed
 }
 
-function pointToString(point: Vector) {
+function pointToString(point: Vec2) {
   return `${point.at(0)},${point.at(1)}`
 }
 
