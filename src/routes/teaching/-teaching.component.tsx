@@ -3,10 +3,11 @@ import {
   TAG_COLORS,
   useTags,
   type TagColor,
-} from '#/components/ui/tag.tsx'
+} from '@/components/ui/tag.tsx'
 import { SectionPage } from '@/components/SectionPage.tsx'
 import type React from 'react'
 import { useMemo } from 'react'
+import { XIcon } from 'lucide-react'
 
 type Workshop = {
   title: string
@@ -142,10 +143,12 @@ const workshops: Workshop[] = [
 
 export default function TeachingPage() {
   const allTags = useMemo(() => {
-    return [...new Set(workshops.flatMap((workshop) => workshop.tags))].sort()
+    return [...new Set(workshops.flatMap((workshop) => workshop.tags))].sort(
+      (a, b) => a.toLowerCase().localeCompare(b.toLowerCase()),
+    )
   }, [])
 
-  const { selected, toggle } = useTags()
+  const { selected, toggle, clear } = useTags()
 
   const tagColors = useMemo(
     () =>
@@ -169,19 +172,29 @@ export default function TeachingPage() {
 
   return (
     <SectionPage title="Teaching">
-      <div className="flex flex-wrap gap-2">
-        {allTags.map(
-          (tag) =>
-            tag !== 'show' && (
-              <Tag
-                key={tag}
-                variant={selected.has(tag) ? 'default' : 'outline'}
-                color={tagColors[tag]}
-                onClick={() => toggle(tag)}
-              >
-                {tag}
-              </Tag>
-            ),
+      <div className="flex items-start justify-between gap-4 py-4">
+        <div className="flex flex-wrap items-center gap-2">
+          {allTags.map(
+            (tag) =>
+              tag !== 'show' && (
+                <Tag
+                  key={tag}
+                  variant={selected.has(tag) ? 'default' : 'outline'}
+                  color={tagColors[tag]}
+                  onClick={() => toggle(tag)}
+                >
+                  {tag}
+                </Tag>
+              ),
+          )}
+        </div>
+        {selected.size > 0 && (
+          <button
+            onClick={() => clear()}
+            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground cursor-pointer"
+          >
+            <XIcon className="size-4 sketchy" /> clear filters
+          </button>
         )}
       </div>
       <div className="grid grid-cols-[repeat(auto-fit,minmax(20rem,1fr))] auto-rows-[12rem] gap-4 py-8">

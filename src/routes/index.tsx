@@ -6,7 +6,32 @@ import { HomepageSection } from '@/components/HomepageSection.tsx'
 import { useCallback } from 'react'
 import { Footer } from '#/components/Footer.tsx'
 
-export const Route = createFileRoute('/')({ component: Home })
+export const Route = createFileRoute('/')({
+  component: Home,
+  head: () => ({
+    meta: [
+      { title: 'Matt Powell' },
+      {
+        name: 'description',
+        content:
+          'Matt Powell — performer, artist, and developer based in Wellington, Aotearoa New Zealand.',
+      },
+      { property: 'og:url', content: 'https://mattpowell.is/' },
+      { property: 'og:title', content: 'Matt Powell' },
+      {
+        property: 'og:description',
+        content:
+          'Matt Powell — performer, artist, and developer based in Wellington, Aotearoa New Zealand.',
+      },
+      { name: 'twitter:title', content: 'Matt Powell' },
+      {
+        name: 'twitter:description',
+        content:
+          'Matt Powell — performer, artist, and developer based in Wellington, Aotearoa New Zealand.',
+      },
+    ],
+  }),
+})
 
 function Home() {
   const nextSection = useCallback(() => {
