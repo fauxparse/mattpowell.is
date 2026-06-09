@@ -4,8 +4,6 @@ export type Theme = (typeof THEMES)[number]
 export const SCHEMES = ['slate', 'stone', 'olive'] as const
 export type Scheme = (typeof SCHEMES)[number]
 
-export const themeInitScript = `(function(){try{var t=localStorage.getItem('theme');var s=localStorage.getItem('color-scheme')||'slate';var d=t==='dark'||(t!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d);document.documentElement.classList.toggle('light',t==='light');document.documentElement.setAttribute('data-color-scheme',s)}catch(e){}})();`
-
 type ThemeChangeOptions = {
   transition?: boolean
 }

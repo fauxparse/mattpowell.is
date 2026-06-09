@@ -7,6 +7,7 @@ import {
   applyThemeAndScheme,
   SCHEMES,
   THEMES,
+  getResolvedScheme,
 } from '@/lib/theme.ts'
 import { upperFirst } from 'es-toolkit'
 import {
@@ -53,8 +54,8 @@ const ThemeContext = createContext<ThemeContext>({
 })
 
 export const ThemeProvider = ({ children }: React.PropsWithChildren) => {
-  const [theme, _setTheme] = useState<Theme>('light')
-  const [colorScheme, _setColorScheme] = useState<Scheme>('slate')
+  const [theme, _setTheme] = useState<Theme>(getResolvedTheme())
+  const [colorScheme, _setColorScheme] = useState<Scheme>(getResolvedScheme())
 
   const setTheme = useCallback((theme: Theme) => {
     _setTheme(theme)

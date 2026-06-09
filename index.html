@@ -2,6 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <script>
+      ;(function () {
+        try {
+          var t = localStorage.getItem('theme')
+          var s = localStorage.getItem('color-scheme') || 'slate'
+          var d =
+            t === 'dark' ||
+            (t !== 'light' &&
+              matchMedia('(prefers-color-scheme: dark)').matches)
+          document.documentElement.classList.toggle('dark', d)
+          document.documentElement.classList.toggle('light', t === 'light')
+          document.documentElement.setAttribute('data-color-scheme', s)
+        } catch (e) {}
+      })()
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
