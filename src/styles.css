@@ -122,6 +122,25 @@
     --ring: var(--color-accent-500);
 
     --radius: 1rem;
+
+    --tag-red: var(--color-red-400);
+    --tag-teal: var(--color-teal-400);
+    --tag-purple: var(--color-purple-400);
+    --tag-amber: var(--color-amber-400);
+    --tag-sky: var(--color-sky-400);
+    --tag-pink: var(--color-pink-400);
+    --tag-lime: var(--color-lime-400);
+    --tag-indigo: var(--color-indigo-400);
+    --tag-neutral: var(--color-neutral-400);
+    --tag-red-foreground: var(--color-red-100);
+    --tag-teal-foreground: var(--color-teal-100);
+    --tag-purple-foreground: var(--color-purple-100);
+    --tag-amber-foreground: var(--color-amber-100);
+    --tag-sky-foreground: var(--color-sky-100);
+    --tag-pink-foreground: var(--color-pink-100);
+    --tag-lime-foreground: var(--color-lime-100);
+    --tag-indigo-foreground: var(--color-indigo-100);
+    --tag-neutral-foreground: var(--color-neutral-100);
   }
 
   .dark {

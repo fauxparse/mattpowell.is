@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TeachingRouteRouteImport } from './routes/teaching/route'
 import { Route as MeRouteRouteImport } from './routes/me/route'
 import { Route as ImprovisingRouteRouteImport } from './routes/improvising/route'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TeachingRouteRoute = TeachingRouteRouteImport.update({
+  id: '/teaching',
+  path: '/teaching',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MeRouteRoute = MeRouteRouteImport.update({
   id: '/me',
   path: '/me',
@@ -33,34 +39,45 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/improvising': typeof ImprovisingRouteRoute
   '/me': typeof MeRouteRoute
+  '/teaching': typeof TeachingRouteRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/improvising': typeof ImprovisingRouteRoute
   '/me': typeof MeRouteRoute
+  '/teaching': typeof TeachingRouteRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/improvising': typeof ImprovisingRouteRoute
   '/me': typeof MeRouteRoute
+  '/teaching': typeof TeachingRouteRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/improvising' | '/me'
+  fullPaths: '/' | '/improvising' | '/me' | '/teaching'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/improvising' | '/me'
-  id: '__root__' | '/' | '/improvising' | '/me'
+  to: '/' | '/improvising' | '/me' | '/teaching'
+  id: '__root__' | '/' | '/improvising' | '/me' | '/teaching'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ImprovisingRouteRoute: typeof ImprovisingRouteRoute
   MeRouteRoute: typeof MeRouteRoute
+  TeachingRouteRoute: typeof TeachingRouteRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/teaching': {
+      id: '/teaching'
+      path: '/teaching'
+      fullPath: '/teaching'
+      preLoaderRoute: typeof TeachingRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/me': {
       id: '/me'
       path: '/me'
@@ -89,16 +106,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ImprovisingRouteRoute: ImprovisingRouteRoute,
   MeRouteRoute: MeRouteRoute,
+  TeachingRouteRoute: TeachingRouteRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
