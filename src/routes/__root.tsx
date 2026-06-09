@@ -1,6 +1,7 @@
 import { HeadContent, Outlet, createRootRoute } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
+import { Analytics } from '@vercel/analytics/react'
 
 import { ThemeToggle } from '../components/ThemeToggle'
 import { BoilFilter } from '@/components/BoilFilter.tsx'
@@ -45,6 +46,7 @@ function RootDocument() {
           },
         ]}
       />
+      <Analytics />
     </ThemeProvider>
   )
 }
