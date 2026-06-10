@@ -15,7 +15,13 @@ import { Route as ImprovisingRouteRouteImport } from './routes/improvising/route
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TeachingIndexRouteImport } from './routes/teaching/index'
 import { Route as TeachingWorkshopsTheIdiotRouteImport } from './routes/teaching/workshops/the-idiot'
+import { Route as TeachingWorkshopsStartingOverAndOverRouteImport } from './routes/teaching/workshops/starting-over-and-over'
+import { Route as TeachingWorkshopsSneakingUpOnYourselfRouteImport } from './routes/teaching/workshops/sneaking-up-on-yourself'
+import { Route as TeachingWorkshopsScenesThatSuckRouteImport } from './routes/teaching/workshops/scenes-that-suck'
+import { Route as TeachingWorkshopsReadingTheSceneRouteImport } from './routes/teaching/workshops/reading-the-scene'
+import { Route as TeachingWorkshopsNothingHappenedTodayRouteImport } from './routes/teaching/workshops/nothing-happened-today'
 import { Route as TeachingWorkshopsEnPointeRouteImport } from './routes/teaching/workshops/en-pointe'
+import { Route as TeachingWorkshopsBigMeMcSkillsRouteImport } from './routes/teaching/workshops/big-me-mc-skills'
 
 const TeachingRouteRoute = TeachingRouteRouteImport.update({
   id: '/teaching',
@@ -48,10 +54,46 @@ const TeachingWorkshopsTheIdiotRoute =
     path: '/workshops/the-idiot',
     getParentRoute: () => TeachingRouteRoute,
   } as any)
+const TeachingWorkshopsStartingOverAndOverRoute =
+  TeachingWorkshopsStartingOverAndOverRouteImport.update({
+    id: '/workshops/starting-over-and-over',
+    path: '/workshops/starting-over-and-over',
+    getParentRoute: () => TeachingRouteRoute,
+  } as any)
+const TeachingWorkshopsSneakingUpOnYourselfRoute =
+  TeachingWorkshopsSneakingUpOnYourselfRouteImport.update({
+    id: '/workshops/sneaking-up-on-yourself',
+    path: '/workshops/sneaking-up-on-yourself',
+    getParentRoute: () => TeachingRouteRoute,
+  } as any)
+const TeachingWorkshopsScenesThatSuckRoute =
+  TeachingWorkshopsScenesThatSuckRouteImport.update({
+    id: '/workshops/scenes-that-suck',
+    path: '/workshops/scenes-that-suck',
+    getParentRoute: () => TeachingRouteRoute,
+  } as any)
+const TeachingWorkshopsReadingTheSceneRoute =
+  TeachingWorkshopsReadingTheSceneRouteImport.update({
+    id: '/workshops/reading-the-scene',
+    path: '/workshops/reading-the-scene',
+    getParentRoute: () => TeachingRouteRoute,
+  } as any)
+const TeachingWorkshopsNothingHappenedTodayRoute =
+  TeachingWorkshopsNothingHappenedTodayRouteImport.update({
+    id: '/workshops/nothing-happened-today',
+    path: '/workshops/nothing-happened-today',
+    getParentRoute: () => TeachingRouteRoute,
+  } as any)
 const TeachingWorkshopsEnPointeRoute =
   TeachingWorkshopsEnPointeRouteImport.update({
     id: '/workshops/en-pointe',
     path: '/workshops/en-pointe',
+    getParentRoute: () => TeachingRouteRoute,
+  } as any)
+const TeachingWorkshopsBigMeMcSkillsRoute =
+  TeachingWorkshopsBigMeMcSkillsRouteImport.update({
+    id: '/workshops/big-me-mc-skills',
+    path: '/workshops/big-me-mc-skills',
     getParentRoute: () => TeachingRouteRoute,
   } as any)
 
@@ -61,7 +103,13 @@ export interface FileRoutesByFullPath {
   '/me': typeof MeRouteRoute
   '/teaching': typeof TeachingRouteRouteWithChildren
   '/teaching/': typeof TeachingIndexRoute
+  '/teaching/workshops/big-me-mc-skills': typeof TeachingWorkshopsBigMeMcSkillsRoute
   '/teaching/workshops/en-pointe': typeof TeachingWorkshopsEnPointeRoute
+  '/teaching/workshops/nothing-happened-today': typeof TeachingWorkshopsNothingHappenedTodayRoute
+  '/teaching/workshops/reading-the-scene': typeof TeachingWorkshopsReadingTheSceneRoute
+  '/teaching/workshops/scenes-that-suck': typeof TeachingWorkshopsScenesThatSuckRoute
+  '/teaching/workshops/sneaking-up-on-yourself': typeof TeachingWorkshopsSneakingUpOnYourselfRoute
+  '/teaching/workshops/starting-over-and-over': typeof TeachingWorkshopsStartingOverAndOverRoute
   '/teaching/workshops/the-idiot': typeof TeachingWorkshopsTheIdiotRoute
 }
 export interface FileRoutesByTo {
@@ -69,7 +117,13 @@ export interface FileRoutesByTo {
   '/improvising': typeof ImprovisingRouteRoute
   '/me': typeof MeRouteRoute
   '/teaching': typeof TeachingIndexRoute
+  '/teaching/workshops/big-me-mc-skills': typeof TeachingWorkshopsBigMeMcSkillsRoute
   '/teaching/workshops/en-pointe': typeof TeachingWorkshopsEnPointeRoute
+  '/teaching/workshops/nothing-happened-today': typeof TeachingWorkshopsNothingHappenedTodayRoute
+  '/teaching/workshops/reading-the-scene': typeof TeachingWorkshopsReadingTheSceneRoute
+  '/teaching/workshops/scenes-that-suck': typeof TeachingWorkshopsScenesThatSuckRoute
+  '/teaching/workshops/sneaking-up-on-yourself': typeof TeachingWorkshopsSneakingUpOnYourselfRoute
+  '/teaching/workshops/starting-over-and-over': typeof TeachingWorkshopsStartingOverAndOverRoute
   '/teaching/workshops/the-idiot': typeof TeachingWorkshopsTheIdiotRoute
 }
 export interface FileRoutesById {
@@ -79,7 +133,13 @@ export interface FileRoutesById {
   '/me': typeof MeRouteRoute
   '/teaching': typeof TeachingRouteRouteWithChildren
   '/teaching/': typeof TeachingIndexRoute
+  '/teaching/workshops/big-me-mc-skills': typeof TeachingWorkshopsBigMeMcSkillsRoute
   '/teaching/workshops/en-pointe': typeof TeachingWorkshopsEnPointeRoute
+  '/teaching/workshops/nothing-happened-today': typeof TeachingWorkshopsNothingHappenedTodayRoute
+  '/teaching/workshops/reading-the-scene': typeof TeachingWorkshopsReadingTheSceneRoute
+  '/teaching/workshops/scenes-that-suck': typeof TeachingWorkshopsScenesThatSuckRoute
+  '/teaching/workshops/sneaking-up-on-yourself': typeof TeachingWorkshopsSneakingUpOnYourselfRoute
+  '/teaching/workshops/starting-over-and-over': typeof TeachingWorkshopsStartingOverAndOverRoute
   '/teaching/workshops/the-idiot': typeof TeachingWorkshopsTheIdiotRoute
 }
 export interface FileRouteTypes {
@@ -90,7 +150,13 @@ export interface FileRouteTypes {
     | '/me'
     | '/teaching'
     | '/teaching/'
+    | '/teaching/workshops/big-me-mc-skills'
     | '/teaching/workshops/en-pointe'
+    | '/teaching/workshops/nothing-happened-today'
+    | '/teaching/workshops/reading-the-scene'
+    | '/teaching/workshops/scenes-that-suck'
+    | '/teaching/workshops/sneaking-up-on-yourself'
+    | '/teaching/workshops/starting-over-and-over'
     | '/teaching/workshops/the-idiot'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -98,7 +164,13 @@ export interface FileRouteTypes {
     | '/improvising'
     | '/me'
     | '/teaching'
+    | '/teaching/workshops/big-me-mc-skills'
     | '/teaching/workshops/en-pointe'
+    | '/teaching/workshops/nothing-happened-today'
+    | '/teaching/workshops/reading-the-scene'
+    | '/teaching/workshops/scenes-that-suck'
+    | '/teaching/workshops/sneaking-up-on-yourself'
+    | '/teaching/workshops/starting-over-and-over'
     | '/teaching/workshops/the-idiot'
   id:
     | '__root__'
@@ -107,7 +179,13 @@ export interface FileRouteTypes {
     | '/me'
     | '/teaching'
     | '/teaching/'
+    | '/teaching/workshops/big-me-mc-skills'
     | '/teaching/workshops/en-pointe'
+    | '/teaching/workshops/nothing-happened-today'
+    | '/teaching/workshops/reading-the-scene'
+    | '/teaching/workshops/scenes-that-suck'
+    | '/teaching/workshops/sneaking-up-on-yourself'
+    | '/teaching/workshops/starting-over-and-over'
     | '/teaching/workshops/the-idiot'
   fileRoutesById: FileRoutesById
 }
@@ -162,6 +240,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeachingWorkshopsTheIdiotRouteImport
       parentRoute: typeof TeachingRouteRoute
     }
+    '/teaching/workshops/starting-over-and-over': {
+      id: '/teaching/workshops/starting-over-and-over'
+      path: '/workshops/starting-over-and-over'
+      fullPath: '/teaching/workshops/starting-over-and-over'
+      preLoaderRoute: typeof TeachingWorkshopsStartingOverAndOverRouteImport
+      parentRoute: typeof TeachingRouteRoute
+    }
+    '/teaching/workshops/sneaking-up-on-yourself': {
+      id: '/teaching/workshops/sneaking-up-on-yourself'
+      path: '/workshops/sneaking-up-on-yourself'
+      fullPath: '/teaching/workshops/sneaking-up-on-yourself'
+      preLoaderRoute: typeof TeachingWorkshopsSneakingUpOnYourselfRouteImport
+      parentRoute: typeof TeachingRouteRoute
+    }
+    '/teaching/workshops/scenes-that-suck': {
+      id: '/teaching/workshops/scenes-that-suck'
+      path: '/workshops/scenes-that-suck'
+      fullPath: '/teaching/workshops/scenes-that-suck'
+      preLoaderRoute: typeof TeachingWorkshopsScenesThatSuckRouteImport
+      parentRoute: typeof TeachingRouteRoute
+    }
+    '/teaching/workshops/reading-the-scene': {
+      id: '/teaching/workshops/reading-the-scene'
+      path: '/workshops/reading-the-scene'
+      fullPath: '/teaching/workshops/reading-the-scene'
+      preLoaderRoute: typeof TeachingWorkshopsReadingTheSceneRouteImport
+      parentRoute: typeof TeachingRouteRoute
+    }
+    '/teaching/workshops/nothing-happened-today': {
+      id: '/teaching/workshops/nothing-happened-today'
+      path: '/workshops/nothing-happened-today'
+      fullPath: '/teaching/workshops/nothing-happened-today'
+      preLoaderRoute: typeof TeachingWorkshopsNothingHappenedTodayRouteImport
+      parentRoute: typeof TeachingRouteRoute
+    }
     '/teaching/workshops/en-pointe': {
       id: '/teaching/workshops/en-pointe'
       path: '/workshops/en-pointe'
@@ -169,18 +282,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeachingWorkshopsEnPointeRouteImport
       parentRoute: typeof TeachingRouteRoute
     }
+    '/teaching/workshops/big-me-mc-skills': {
+      id: '/teaching/workshops/big-me-mc-skills'
+      path: '/workshops/big-me-mc-skills'
+      fullPath: '/teaching/workshops/big-me-mc-skills'
+      preLoaderRoute: typeof TeachingWorkshopsBigMeMcSkillsRouteImport
+      parentRoute: typeof TeachingRouteRoute
+    }
   }
 }
 
 interface TeachingRouteRouteChildren {
   TeachingIndexRoute: typeof TeachingIndexRoute
+  TeachingWorkshopsBigMeMcSkillsRoute: typeof TeachingWorkshopsBigMeMcSkillsRoute
   TeachingWorkshopsEnPointeRoute: typeof TeachingWorkshopsEnPointeRoute
+  TeachingWorkshopsNothingHappenedTodayRoute: typeof TeachingWorkshopsNothingHappenedTodayRoute
+  TeachingWorkshopsReadingTheSceneRoute: typeof TeachingWorkshopsReadingTheSceneRoute
+  TeachingWorkshopsScenesThatSuckRoute: typeof TeachingWorkshopsScenesThatSuckRoute
+  TeachingWorkshopsSneakingUpOnYourselfRoute: typeof TeachingWorkshopsSneakingUpOnYourselfRoute
+  TeachingWorkshopsStartingOverAndOverRoute: typeof TeachingWorkshopsStartingOverAndOverRoute
   TeachingWorkshopsTheIdiotRoute: typeof TeachingWorkshopsTheIdiotRoute
 }
 
 const TeachingRouteRouteChildren: TeachingRouteRouteChildren = {
   TeachingIndexRoute: TeachingIndexRoute,
+  TeachingWorkshopsBigMeMcSkillsRoute: TeachingWorkshopsBigMeMcSkillsRoute,
   TeachingWorkshopsEnPointeRoute: TeachingWorkshopsEnPointeRoute,
+  TeachingWorkshopsNothingHappenedTodayRoute:
+    TeachingWorkshopsNothingHappenedTodayRoute,
+  TeachingWorkshopsReadingTheSceneRoute: TeachingWorkshopsReadingTheSceneRoute,
+  TeachingWorkshopsScenesThatSuckRoute: TeachingWorkshopsScenesThatSuckRoute,
+  TeachingWorkshopsSneakingUpOnYourselfRoute:
+    TeachingWorkshopsSneakingUpOnYourselfRoute,
+  TeachingWorkshopsStartingOverAndOverRoute:
+    TeachingWorkshopsStartingOverAndOverRoute,
   TeachingWorkshopsTheIdiotRoute: TeachingWorkshopsTheIdiotRoute,
 }
 

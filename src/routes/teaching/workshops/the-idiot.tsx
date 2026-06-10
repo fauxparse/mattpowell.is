@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
-import type { Workshop as WorkshopDefinition } from './-components/types'
-import { WorkshopHeader } from './-components/WorkshopHeader'
-import { WorkshopBody } from './-components/WorkshopBody'
+import type { Workshop as WorkshopDefinition } from '../-components/types'
+import { WorkshopHeader } from '../-components/WorkshopHeader'
+import { WorkshopBody } from '../-components/WorkshopBody'
 
 export const Workshop = {
   id: 'the-idiot',

@@ -27,7 +27,7 @@ export const WorkshopHeader = ({ workshop }: WorkshopHeaderProps) => {
         </Link>
         &gt;
       </div>
-      <h1 className="text-h1 font-bold text-accent-500 leading-[1.2] md:mt-16">
+      <h1 className="text-h1 font-bold text-accent-500 leading-[1.2] md:mt-16 text-balance">
         {workshop.title}
       </h1>
       <p className="text-lg md:text-xl text-muted-foreground text-balance">
