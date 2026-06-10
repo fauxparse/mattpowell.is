@@ -13,6 +13,9 @@ import { Route as TeachingRouteRouteImport } from './routes/teaching/route'
 import { Route as MeRouteRouteImport } from './routes/me/route'
 import { Route as ImprovisingRouteRouteImport } from './routes/improvising/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TeachingIndexRouteImport } from './routes/teaching/index'
+import { Route as TeachingWorkshopsTheIdiotRouteImport } from './routes/teaching/workshops/the-idiot'
+import { Route as TeachingWorkshopsEnPointeRouteImport } from './routes/teaching/workshops/en-pointe'
 
 const TeachingRouteRoute = TeachingRouteRouteImport.update({
   id: '/teaching',
@@ -34,39 +37,85 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TeachingIndexRoute = TeachingIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => TeachingRouteRoute,
+} as any)
+const TeachingWorkshopsTheIdiotRoute =
+  TeachingWorkshopsTheIdiotRouteImport.update({
+    id: '/workshops/the-idiot',
+    path: '/workshops/the-idiot',
+    getParentRoute: () => TeachingRouteRoute,
+  } as any)
+const TeachingWorkshopsEnPointeRoute =
+  TeachingWorkshopsEnPointeRouteImport.update({
+    id: '/workshops/en-pointe',
+    path: '/workshops/en-pointe',
+    getParentRoute: () => TeachingRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/improvising': typeof ImprovisingRouteRoute
   '/me': typeof MeRouteRoute
-  '/teaching': typeof TeachingRouteRoute
+  '/teaching': typeof TeachingRouteRouteWithChildren
+  '/teaching/': typeof TeachingIndexRoute
+  '/teaching/workshops/en-pointe': typeof TeachingWorkshopsEnPointeRoute
+  '/teaching/workshops/the-idiot': typeof TeachingWorkshopsTheIdiotRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/improvising': typeof ImprovisingRouteRoute
   '/me': typeof MeRouteRoute
-  '/teaching': typeof TeachingRouteRoute
+  '/teaching': typeof TeachingIndexRoute
+  '/teaching/workshops/en-pointe': typeof TeachingWorkshopsEnPointeRoute
+  '/teaching/workshops/the-idiot': typeof TeachingWorkshopsTheIdiotRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/improvising': typeof ImprovisingRouteRoute
   '/me': typeof MeRouteRoute
-  '/teaching': typeof TeachingRouteRoute
+  '/teaching': typeof TeachingRouteRouteWithChildren
+  '/teaching/': typeof TeachingIndexRoute
+  '/teaching/workshops/en-pointe': typeof TeachingWorkshopsEnPointeRoute
+  '/teaching/workshops/the-idiot': typeof TeachingWorkshopsTheIdiotRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/improvising' | '/me' | '/teaching'
+  fullPaths:
+    | '/'
+    | '/improvising'
+    | '/me'
+    | '/teaching'
+    | '/teaching/'
+    | '/teaching/workshops/en-pointe'
+    | '/teaching/workshops/the-idiot'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/improvising' | '/me' | '/teaching'
-  id: '__root__' | '/' | '/improvising' | '/me' | '/teaching'
+  to:
+    | '/'
+    | '/improvising'
+    | '/me'
+    | '/teaching'
+    | '/teaching/workshops/en-pointe'
+    | '/teaching/workshops/the-idiot'
+  id:
+    | '__root__'
+    | '/'
+    | '/improvising'
+    | '/me'
+    | '/teaching'
+    | '/teaching/'
+    | '/teaching/workshops/en-pointe'
+    | '/teaching/workshops/the-idiot'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ImprovisingRouteRoute: typeof ImprovisingRouteRoute
   MeRouteRoute: typeof MeRouteRoute
-  TeachingRouteRoute: typeof TeachingRouteRoute
+  TeachingRouteRoute: typeof TeachingRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -99,14 +148,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/teaching/': {
+      id: '/teaching/'
+      path: '/'
+      fullPath: '/teaching/'
+      preLoaderRoute: typeof TeachingIndexRouteImport
+      parentRoute: typeof TeachingRouteRoute
+    }
+    '/teaching/workshops/the-idiot': {
+      id: '/teaching/workshops/the-idiot'
+      path: '/workshops/the-idiot'
+      fullPath: '/teaching/workshops/the-idiot'
+      preLoaderRoute: typeof TeachingWorkshopsTheIdiotRouteImport
+      parentRoute: typeof TeachingRouteRoute
+    }
+    '/teaching/workshops/en-pointe': {
+      id: '/teaching/workshops/en-pointe'
+      path: '/workshops/en-pointe'
+      fullPath: '/teaching/workshops/en-pointe'
+      preLoaderRoute: typeof TeachingWorkshopsEnPointeRouteImport
+      parentRoute: typeof TeachingRouteRoute
+    }
   }
 }
+
+interface TeachingRouteRouteChildren {
+  TeachingIndexRoute: typeof TeachingIndexRoute
+  TeachingWorkshopsEnPointeRoute: typeof TeachingWorkshopsEnPointeRoute
+  TeachingWorkshopsTheIdiotRoute: typeof TeachingWorkshopsTheIdiotRoute
+}
+
+const TeachingRouteRouteChildren: TeachingRouteRouteChildren = {
+  TeachingIndexRoute: TeachingIndexRoute,
+  TeachingWorkshopsEnPointeRoute: TeachingWorkshopsEnPointeRoute,
+  TeachingWorkshopsTheIdiotRoute: TeachingWorkshopsTheIdiotRoute,
+}
+
+const TeachingRouteRouteWithChildren = TeachingRouteRoute._addFileChildren(
+  TeachingRouteRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ImprovisingRouteRoute: ImprovisingRouteRoute,
   MeRouteRoute: MeRouteRoute,
-  TeachingRouteRoute: TeachingRouteRoute,
+  TeachingRouteRoute: TeachingRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

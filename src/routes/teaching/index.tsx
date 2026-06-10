@@ -1,16 +1,10 @@
-import { SectionPage } from '@/components/SectionPage.tsx'
-import { createFileRoute, Outlet } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router'
+import { lazy } from 'react'
 
-const TeachingLayout = () => {
-  return (
-    <SectionPage title="Teaching">
-      <Outlet />
-    </SectionPage>
-  )
-}
+const TeachingPage = lazy(() => import('./-teaching.component'))
 
-export const Route = createFileRoute('/teaching')({
-  component: TeachingLayout,
+export const Route = createFileRoute('/teaching/')({
+  component: TeachingPage,
   head: () => ({
     meta: [
       { title: 'Matt Powell is teaching' },

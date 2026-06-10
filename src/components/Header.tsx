@@ -11,7 +11,7 @@ export const Header = ({ title }: HeaderProps) => {
   const id = kebabCase(title)
 
   return (
-    <header className="py-4 border-b border-border pl-10 relative flex items-center justify-between">
+    <header className="py-4 rule-after pl-10 relative flex items-center justify-between">
       <Portrait
         headOnly
         className="max-w-28 absolute left-0 top-1/2 pointer-events-none w-auto h-auto translate-x-[-37%] translate-y-[-22%]"

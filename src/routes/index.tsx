@@ -4,7 +4,7 @@ import { Portrait } from '@/components/Portrait.tsx'
 import './-Home.css'
 import { HomepageSection } from '@/components/HomepageSection.tsx'
 import { useCallback } from 'react'
-import { Footer } from '#/components/Footer.tsx'
+import { Footer } from '@/components/Footer.tsx'
 
 export const Route = createFileRoute('/')({
   component: Home,
@@ -115,6 +115,14 @@ function Home() {
         <HomepageSection.Note>
           Here you can find some of the many workshops I’m available to teach.
         </HomepageSection.Note>
+        <HomepageSection.Buttons>
+          <Link
+            className="px-4 py-2 bg-accent-500 text-accent-50 rounded-lg text-2xl font-bold sketchy hover:boil"
+            to="/teaching"
+          >
+            My workshops
+          </Link>
+        </HomepageSection.Buttons>
       </HomepageSection>
       <HomepageSection title="Writing">
         <HomepageSection.Paragraph>

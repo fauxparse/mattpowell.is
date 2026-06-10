@@ -16,6 +16,7 @@
 
 @import 'tailwindcss';
 @import 'tw-animate-css';
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -55,6 +56,7 @@
   --color-panel-inverse-foreground: var(--panel-inverse-foreground);
   --color-border: var(--border);
   --text-hero: clamp(0.875rem, 5vw, 2rem);
+  --text-h1: clamp(2.5rem, 5vw, 4rem);
   --color-link: var(--link);
   --color-link-underline: var(--link-underline);
   --color-ring: var(--ring);
@@ -325,6 +327,19 @@
       @apply boil;
     }
   }
+}
+
+@utility rule {
+  position: relative;
+
+  &::before {
+    content: '';
+    @apply absolute inset-0 bottom-auto h-1 border-t border-border sketchy pointer-events-none;
+  }
+}
+
+@utility rule-after {
+  @apply rule before:top-full;
 }
 
 :root.theme-view-transition::view-transition-old(root),
