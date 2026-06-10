@@ -59,6 +59,8 @@ export const PullChain = ({
   const mouseDown = useRef<boolean>(false)
   const toggled = useRef<boolean>(false)
   const startAnimation = useRef<(() => void) | null>(null)
+  const stopAnimation = useRef<(() => void) | null>(null)
+  const endDrag = useRef<(() => void) | null>(null)
   const subPixelFrames = useRef<number>(0)
 
   const [container, setContainer] = useState<SVGSVGElement | null>(null)
@@ -143,14 +145,42 @@ export const PullChain = ({
       lastFrameTime = null
       animationFrameId = requestAnimationFrame(frame)
     }
+    stopAnimation.current = stop
 
     startAnimation.current()
 
     return () => {
       startAnimation.current = null
+      stopAnimation.current = null
       stop()
     }
   }, [draw])
+
+  const resetPhysics = useCallback(() => {
+    endDrag.current?.()
+    stopAnimation.current?.()
+    toggled.current = false
+    subPixelFrames.current = 0
+    chain.current = new Chain(0, -50, length)
+    chain.current.makeStatic()
+    draw()
+  }, [draw, length])
+
+  useEffect(() => {
+    const resetIfUnfocused = () => {
+      if (document.visibilityState === 'hidden' || !document.hasFocus()) {
+        resetPhysics()
+      }
+    }
+
+    window.addEventListener('blur', resetIfUnfocused)
+    document.addEventListener('visibilitychange', resetIfUnfocused)
+
+    return () => {
+      window.removeEventListener('blur', resetIfUnfocused)
+      document.removeEventListener('visibilitychange', resetIfUnfocused)
+    }
+  }, [resetPhysics])
 
   const pointerDown = useCallback(
     (event: React.PointerEvent<SVGGElement>) => {
@@ -198,6 +228,8 @@ export const PullChain = ({
       window.addEventListener('pointermove', moved)
 
       const ended = () => {
+        if (endDrag.current !== ended) return
+        endDrag.current = null
         mouseDown.current = false
         window.removeEventListener('pointermove', moved)
         window.removeEventListener('pointerup', ended)
@@ -206,6 +238,7 @@ export const PullChain = ({
           ring.releasePointerCapture(pointerId)
         chain.current.tail?.unlock?.()
       }
+      endDrag.current = ended
 
       window.addEventListener('pointerup', ended, { once: true })
       window.addEventListener('pointercancel', ended, { once: true })

@@ -327,14 +327,6 @@
   }
 }
 
-::view-transition-group(image-card-backdrop) {
-  z-index: 500;
-}
-
-::view-transition-group(selected-image-card) {
-  z-index: 510;
-}
-
 :root.theme-view-transition::view-transition-old(root),
 :root.theme-view-transition::view-transition-new(root) {
   animation: none;
@@ -350,6 +342,12 @@
   clip-path: inset(0 100% 0 0);
   z-index: 1;
 }
+
+/* ::view-transition-old(*.preview-image),
+::view-transition-new(*.preview-image) {
+  animation: none;
+  mix-blend-mode: normal;
+} */
 
 @keyframes theme-wipe-in {
   to {
@@ -403,5 +401,14 @@
   }
   html {
     @apply font-sans;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

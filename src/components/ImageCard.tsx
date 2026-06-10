@@ -1,5 +1,5 @@
 // oxlint-disable jsx-a11y/click-events-have-key-events jsx-a11y/prefer-tag-over-role jsx-a11y/no-static-element-interactions
-import { useCallback, useEffect, useReducer, useState } from 'react'
+import { useCallback, useEffect, useReducer, useRef, useState } from 'react'
 import { flushSync } from 'react-dom'
 import { MaskedImage } from './MaskedImage'
 import { cn } from '@/lib/utils'
@@ -24,6 +24,7 @@ export type ImageData = {
   width: number
   height: number
   rotate: number
+  blurHash: string
 }
 
 type ViewTransitionDocument = Document & {
@@ -58,7 +59,8 @@ export const ImageCard = ({
   onDeselect,
 }: ImageCardProps) => {
   const orientation = image.width > image.height ? 'landscape' : 'portrait'
-  const viewTransitionName = 'selected-image-card'
+  const viewTransitionName = `image-card-${image.name}`
+  const imageViewTransitionName = `${viewTransitionName}-image`
   const [fullImageLoaded, setFullImageLoaded] = useState(false)
   const srcSet = toSrcSet(image.display)
   const fullSize =
@@ -75,6 +77,7 @@ export const ImageCard = ({
       ? 'w-[min(80vw,100vh)] aspect-4/3'
       : 'h-[min(80vh,100vw)] aspect-3/4',
   )
+  const [isTransitioning, setIsTransitioning] = useState(false)
 
   const setOpenWithTransition = useCallback(
     (nextOpen: boolean) => {
@@ -93,19 +96,26 @@ export const ImageCard = ({
 
       const transition = viewTransitionDocument.startViewTransition(() => {
         flushSync(() => {
+          setIsTransitioning(true)
           onOpenChange(nextOpen)
         })
       })
 
-      if (!nextOpen) {
-        transition.finished.finally(onDeselect)
-      }
+      transition.finished.finally(() => {
+        if (!nextOpen) {
+          setIsTransitioning(false)
+          onDeselect()
+        }
+      })
     },
     [onDeselect, onOpenChange],
   )
 
+  const currentPreviewSrc = useRef(previewSrc(image))
+
   const showImage = () => {
     flushSync(() => {
+      currentPreviewSrc.current = previewSrc(image)
       onSelect()
     })
     setOpenWithTransition(true)
@@ -148,15 +158,19 @@ export const ImageCard = ({
       >
         <div
           className="panel before:shadow-xl before:bg-neutral-50 before:border before:border-border before:rounded-2xl"
-          style={{ viewTransitionName: selected ? viewTransitionName : 'none' }}
+          style={{ viewTransitionName }}
           onClick={(e) => e.stopPropagation()}
         >
           <div className={openImageClassName}>
             <MaskedImage
-              src={previewSrc(image)}
+              src={currentPreviewSrc.current}
               alt=""
               orientation={orientation}
               className="absolute inset-0 size-full"
+              style={{
+                viewTransitionName: imageViewTransitionName,
+                viewTransitionClass: 'preview-image',
+              }}
             />
             <MaskedImage
               src={imageSrc(image)}
@@ -172,7 +186,7 @@ export const ImageCard = ({
               )}
             />
           </div>
-          <div className="absolute bottom-8 left-8 right-8 p-4 z-1 panel before:bg-neutral-100/80 text-neutral-800 text-md grid md:grid-cols-[1fr_auto] gap-4 md:gap-8">
+          <div className="absolute bottom-8 left-8 right-8 p-4 z-1 panel before:bg-neutral-100/80 text-neutral-800 text-md grid md:grid-cols-[1fr_auto] gap-4 md:gap-8 animate-[fade-in_300ms_300ms_ease-out_both]">
             <p className="m-0 md:text-lg">{image.alt}</p>
             <div className="flex flex-col gap-2">
               <p className="flex items-center gap-2">
@@ -221,7 +235,7 @@ export const ImageCard = ({
         top: `${image.y}cqw`,
         zIndex: selected ? 510 : image.z,
         rotate: `${image.rotate}deg`,
-        viewTransitionName: selected ? viewTransitionName : 'none',
+        viewTransitionName,
       }}
       onClick={showImage}
       role="button"
@@ -234,12 +248,16 @@ export const ImageCard = ({
             ? 'w-[35cqw] aspect-4/3'
             : 'h-[35cqw] aspect-3/4',
         )}
-        src={imageSrc(image)}
-        srcSet={srcSet}
-        sizes={thumbnailSize}
+        src={previewSrc(image)}
+        srcSet={isTransitioning ? undefined : srcSet}
+        sizes={isTransitioning ? undefined : thumbnailSize}
         alt={image.alt}
         loading="lazy"
         decoding="async"
+        style={{
+          viewTransitionName: imageViewTransitionName,
+          viewTransitionClass: 'preview-image',
+        }}
       />
     </div>
   )

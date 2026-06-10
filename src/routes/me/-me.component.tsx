@@ -18,6 +18,7 @@ const Images: ImageData[] = [
     width: 576,
     height: 864,
     rotate: -5,
+    blurHash: 'THDJ9f9F0100?b?b?wIUnNaxRjM|',
   },
   {
     name: 'landscape',
@@ -36,6 +37,7 @@ const Images: ImageData[] = [
     width: 1296,
     height: 864,
     rotate: 2,
+    blurHash: 'LA8q81D%00~X00%M~q4n%hRiMd%M',
   },
   {
     name: 'colourful',
@@ -53,6 +55,7 @@ const Images: ImageData[] = [
     width: 1024,
     height: 1366,
     rotate: -1,
+    blurHash: 'L8ExbL000yR63q%3:,Su}Z=fFeOU',
   },
   {
     name: 'stage',
@@ -71,6 +74,7 @@ const Images: ImageData[] = [
     width: 1536,
     height: 1024,
     rotate: 8,
+    blurHash: 'LFC?J_kC00ax00ay~Xof4.ax?Ha#',
   },
 ] as const
 

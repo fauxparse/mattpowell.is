@@ -6,7 +6,7 @@ export function ThemeToggle() {
 
   return (
     <PullChain
-      className="hidden z-1000 xl:block"
+      className="hidden z-400 xl:block"
       position="-10%"
       color="var(--color-muted-foreground)"
       checked={theme === 'dark'}

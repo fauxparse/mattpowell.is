@@ -1,0 +1,25 @@
+---
+description: Do not run project builds unless explicitly requested
+alwaysApply: true
+---
+
+# Build Command Policy
+
+Do not run project-level build commands unless the user explicitly asks for one in the current conversation.
+
+This includes commands such as:
+
+- `npm run build`
+- `pnpm build`
+- `yarn build`
+- `vite build`
+- framework deploy/build equivalents
+
+Allowed without additional permission:
+
+- Reading files
+- Editing files
+- Inspecting diffs
+- Running lint, typecheck, tests, or narrowly scoped verification commands when appropriate
+
+If a build would be useful, ask first and wait for confirmation.
