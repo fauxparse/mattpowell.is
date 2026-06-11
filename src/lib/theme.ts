@@ -1,3 +1,6 @@
+import type { ViewTransitionDocument } from '@/types/ViewTransitionDocument'
+import { useReducedMotion } from './utils/useReducedMotion'
+
 export const THEMES = ['light', 'dark'] as const
 export type Theme = (typeof THEMES)[number]
 
@@ -8,25 +11,16 @@ type ThemeChangeOptions = {
   transition?: boolean
 }
 
-type ViewTransitionDocument = Document & {
-  startViewTransition?: (updateCallback: () => void) => {
-    finished: Promise<void>
-  }
-}
-
-function prefersReducedMotion() {
-  return matchMedia('(prefers-reduced-motion: reduce)').matches
-}
-
 function applyWithThemeTransition(
   update: () => void,
   { transition = true }: ThemeChangeOptions = {},
 ) {
   const viewTransitionDocument = document as ViewTransitionDocument
+  const prefersReducedMotion = useReducedMotion()
 
   if (
     !transition ||
-    prefersReducedMotion() ||
+    prefersReducedMotion ||
     !viewTransitionDocument.startViewTransition
   ) {
     update()

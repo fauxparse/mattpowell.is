@@ -3,7 +3,7 @@ import { Portrait } from '@/components/Portrait.tsx'
 
 import './-Home.css'
 import { HomepageSection } from '@/components/HomepageSection.tsx'
-import { useCallback } from 'react'
+import { useCallback, useRef } from 'react'
 import { Footer } from '@/components/Footer.tsx'
 
 export const Route = createFileRoute('/')({
@@ -34,24 +34,69 @@ export const Route = createFileRoute('/')({
 })
 
 function Home() {
-  const nextSection = useCallback(() => {
-    const allSections = Array.from(document.querySelectorAll('[data-section]'))
-    const nextSectionIndex = allSections.findIndex((section) => {
-      const { top, height } = section.getBoundingClientRect()
-      return top + height / 2 > window.innerHeight
-    })
-    if (nextSectionIndex === -1) return
+  const cleanupProgrammaticScrollRef = useRef<(() => void) | null>(null)
 
-    const nextSection = allSections[nextSectionIndex]
-    nextSection.scrollIntoView({ behavior: 'smooth' })
+  const nextSection = useCallback(() => {
+    const allSections = Array.from(
+      document.querySelectorAll<HTMLElement>('[data-section]'),
+    )
+    if (allSections.length === 0) return
+
+    const currentSectionIndex = allSections.reduce(
+      (closestIndex, section, index) => {
+        const closestSection = allSections[closestIndex]
+        return Math.abs(section.getBoundingClientRect().top) <
+          Math.abs(closestSection.getBoundingClientRect().top)
+          ? index
+          : closestIndex
+      },
+      0,
+    )
+    const nextSection = allSections[currentSectionIndex + 1]
+    if (!nextSection) return
+
+    cleanupProgrammaticScrollRef.current?.()
+
+    const root = document.documentElement
+    const targetTop = nextSection.getBoundingClientRect().top + window.scrollY
+    let frameId: number | undefined
+    let settleTimeoutId: number | undefined
+    let fallbackTimeoutId: number | undefined
+
+    const cleanup = () => {
+      if (frameId !== undefined) window.cancelAnimationFrame(frameId)
+      if (settleTimeoutId !== undefined) window.clearTimeout(settleTimeoutId)
+      if (fallbackTimeoutId !== undefined)
+        window.clearTimeout(fallbackTimeoutId)
+      window.removeEventListener('scrollend', cleanup)
+      delete root.dataset.homeProgrammaticScroll
+      if (cleanupProgrammaticScrollRef.current === cleanup) {
+        cleanupProgrammaticScrollRef.current = null
+      }
+    }
+
+    const cleanupAfterSettling = () => {
+      if (Math.abs(window.scrollY - targetTop) <= 1) {
+        settleTimeoutId = window.setTimeout(cleanup, 100)
+        return
+      }
+
+      frameId = window.requestAnimationFrame(cleanupAfterSettling)
+    }
+
+    root.dataset.homeProgrammaticScroll = 'true'
+    cleanupProgrammaticScrollRef.current = cleanup
+    window.addEventListener('scrollend', cleanup, { once: true })
+    window.scrollTo({ top: targetTop, behavior: 'smooth' })
+
+    frameId = window.requestAnimationFrame(cleanupAfterSettling)
+    fallbackTimeoutId = window.setTimeout(cleanup, 3000)
   }, [])
 
   return (
     <div className="home">
       <header className="bg-radial-[circle_at_50%_20%] from-background to-(--background-gradient-dark) from-60%">
-        <div className="grid h-[calc(var(--vertical)-var(--big)*1.5)] items-start justify-center-safe pt-8">
-          <Portrait className="max-w-lg" />
-        </div>
+        <Portrait className="max-w-lg" />
         <h1 className="text-uppercase [view-transition-name:title]">
           Matt Powell
         </h1>
@@ -200,7 +245,7 @@ function Home() {
         <HomepageSection.Note>
           <Link
             to="/me"
-            className="lg:absolute lg:top-[15%] lg:left-[60%] lg:sticker lg:rotate-5"
+            className="lg:absolute lg:top-[7%] lg:left-[60%] lg:sticker lg:rotate-5"
           >
             <b></b>
             <span>

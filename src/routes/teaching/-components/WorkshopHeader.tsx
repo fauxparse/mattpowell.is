@@ -1,4 +1,4 @@
-import { Tag } from '@/components/ui/tag'
+import { Tag, useTags } from '@/components/ui/tag'
 import type { Workshop } from './types'
 import { useMemo } from 'react'
 import { Link } from '@tanstack/react-router'
@@ -7,6 +7,8 @@ type WorkshopHeaderProps = {
   workshop: Workshop
 }
 export const WorkshopHeader = ({ workshop }: WorkshopHeaderProps) => {
+  const { tagColors } = useTags()
+
   const duration = useMemo(() => {
     const hours = workshop.duration / 60
     return `${hours === Math.floor(hours) ? hours : hours.toFixed(1)} hour${hours > 1 ? 's' : ''}`
@@ -39,7 +41,9 @@ export const WorkshopHeader = ({ workshop }: WorkshopHeaderProps) => {
         <dt>Tags</dt>
         <dd className="flex flex-wrap gap-2">
           {workshop.tags.map((tag) => (
-            <Tag key={tag}>{tag}</Tag>
+            <Tag key={tag} color={tagColors[tag]}>
+              {tag}
+            </Tag>
           ))}
         </dd>
       </dl>

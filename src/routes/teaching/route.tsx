@@ -1,11 +1,27 @@
 import { SectionPage } from '@/components/SectionPage.tsx'
 import { createFileRoute, Outlet } from '@tanstack/react-router'
+import { hasWorkshop } from './-components/types'
+import { TagsProvider } from '@/components/ui/tag'
+import { useMemo } from 'react'
+
+const workshopModules = import.meta.glob('./workshops/*.tsx', { eager: true })
+const workshops = Object.values(workshopModules)
+  .map((module) => (hasWorkshop(module) ? module.Workshop : null))
+  .filter((w) => !!w)
 
 const TeachingLayout = () => {
+  const allTags = useMemo(() => {
+    return [...new Set(workshops.flatMap((workshop) => workshop.tags))].sort(
+      (a, b) => a.toLowerCase().localeCompare(b.toLowerCase()),
+    )
+  }, [])
+
   return (
-    <SectionPage title="Teaching">
-      <Outlet />
-    </SectionPage>
+    <TagsProvider tags={allTags}>
+      <SectionPage title="Teaching">
+        <Outlet />
+      </SectionPage>
+    </TagsProvider>
   )
 }
 

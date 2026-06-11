@@ -6,6 +6,8 @@ import { cn } from '@/lib/utils'
 import { CameraIcon, DownloadIcon, XIcon } from 'lucide-react'
 import { Button } from './ui/button'
 import { CopyButton } from './CopyButton'
+import type { ViewTransitionDocument } from '@/types/ViewTransitionDocument'
+import { useReducedMotion } from '@/lib/utils/useReducedMotion'
 
 type ImageSource = {
   src: string
@@ -25,12 +27,6 @@ export type ImageData = {
   height: number
   rotate: number
   blurHash: string
-}
-
-type ViewTransitionDocument = Document & {
-  startViewTransition?: (callback: () => void) => {
-    finished: Promise<void>
-  }
 }
 
 type ImageCardProps = {
@@ -79,14 +75,13 @@ export const ImageCard = ({
   )
   const [isTransitioning, setIsTransitioning] = useState(false)
 
+  const prefersReducedMotion = useReducedMotion()
+
   const setOpenWithTransition = useCallback(
     (nextOpen: boolean) => {
       const viewTransitionDocument = document as ViewTransitionDocument
 
-      if (
-        !viewTransitionDocument.startViewTransition ||
-        window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      ) {
+      if (!viewTransitionDocument.startViewTransition || prefersReducedMotion) {
         onOpenChange(nextOpen)
         if (!nextOpen) {
           onDeselect()
@@ -108,7 +103,7 @@ export const ImageCard = ({
         }
       })
     },
-    [onDeselect, onOpenChange],
+    [onDeselect, onOpenChange, prefersReducedMotion],
   )
 
   const currentPreviewSrc = useRef(previewSrc(image))

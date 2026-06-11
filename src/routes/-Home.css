@@ -2,9 +2,13 @@ html:has(.home) {
   scroll-snap-type: y mandatory;
 }
 
+html[data-home-programmatic-scroll='true']:has(.home) {
+  scroll-snap-type: none;
+}
+
 .home {
-  --vertical: min(80vw, 60dvh);
-  --big: clamp(2.5rem, 5vw, 5rem);
+  --vertical: 50svh;
+  --big: clamp(2rem, 5vw, 5rem);
   --horizontal: calc(50% + var(--big) * 1.5);
   --gutter: calc(var(--big) * 0.15);
   --slide-distance: 0.025;
@@ -18,6 +22,10 @@ html:has(.home) {
   > header {
     overflow: hidden;
     container: section / inline-size;
+
+    @media (width < 40rem) {
+      --vertical: 50cqw;
+    }
   }
 
   > header {
@@ -26,7 +34,8 @@ html:has(.home) {
 
     h1 {
       position: absolute;
-      bottom: calc(100svh - var(--vertical));
+      top: var(--vertical);
+      bottom: auto;
       left: 0;
       width: var(--horizontal);
       padding-inline: var(--gutter);
@@ -46,11 +55,18 @@ html:has(.home) {
         width: auto;
         right: 0;
         text-align: center;
-        margin-bottom: 1em;
       }
     }
 
     .portrait {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      height: var(--vertical);
+      width: auto;
+      transform: translateX(-50%);
+      pointer-events: none;
+
       [data-part='body'] {
         transition: opacity 0.3s ease-in-out;
       }
@@ -58,6 +74,7 @@ html:has(.home) {
       @container (width < 40rem) {
         height: auto;
         width: 100vw;
+        top: 5cqw;
 
         [data-part='body'] {
           opacity: 0;
@@ -68,13 +85,13 @@ html:has(.home) {
 
   > section {
     position: relative;
-    height: 100dvh;
+    height: 100svh;
     scroll-snap-align: start;
     container: section / inline-size;
 
     h2 {
       position: fixed;
-      bottom: calc(100svh - var(--vertical));
+      top: var(--vertical);
       left: var(--horizontal);
       padding-inline: var(--gutter);
       font-size: var(--big);
@@ -89,6 +106,7 @@ html:has(.home) {
       user-select: none;
 
       @container (width < 40rem) {
+        top: calc(var(--vertical) + var(--big) * 1.2);
         width: auto;
         right: 0;
         left: 0;
@@ -98,7 +116,7 @@ html:has(.home) {
 
     .content {
       position: fixed;
-      top: var(--vertical);
+      top: calc(var(--vertical) + var(--big) * 1.5);
       left: 0;
       right: 0;
       bottom: 0;
@@ -107,6 +125,10 @@ html:has(.home) {
         contentIn ease-out backwards,
         contentOut ease-in forwards;
       animation-range: entry, exit;
+
+      @container (width < 40rem) {
+        top: calc(var(--vertical) + var(--big) * 3);
+      }
     }
   }
 
@@ -218,12 +240,12 @@ html:has(.home) {
 
 @keyframes headingIn {
   0% {
-    transform: translateY(calc(var(--slide-distance) * 100dvh));
+    transform: translateY(calc(var(--slide-distance) * 100svh));
     opacity: 0;
     pointer-events: none;
   }
   25% {
-    transform: translateY(calc(var(--slide-distance) * 100dvh));
+    transform: translateY(calc(var(--slide-distance) * 100svh));
     opacity: 0;
     pointer-events: none;
   }
@@ -241,12 +263,12 @@ html:has(.home) {
     pointer-events: auto;
   }
   75% {
-    transform: translateY(calc(var(--slide-distance) * -100dvh));
+    transform: translateY(calc(var(--slide-distance) * -100svh));
     opacity: 0;
     pointer-events: none;
   }
   100% {
-    transform: translateY(calc(var(--slide-distance) * -100dvh));
+    transform: translateY(calc(var(--slide-distance) * -100svh));
     opacity: 0;
     pointer-events: none;
   }
@@ -254,12 +276,12 @@ html:has(.home) {
 
 @keyframes contentIn {
   0% {
-    transform: translateY(calc(var(--slide-distance) * 50dvh));
+    transform: translateY(calc(var(--slide-distance) * 50svh));
     opacity: 0;
     pointer-events: none;
   }
   50% {
-    transform: translateY(calc(var(--slide-distance) * 50dvh));
+    transform: translateY(calc(var(--slide-distance) * 50svh));
     opacity: 0;
     pointer-events: none;
   }
@@ -277,12 +299,12 @@ html:has(.home) {
     pointer-events: auto;
   }
   50% {
-    transform: translateY(calc(var(--slide-distance) * -50dvh));
+    transform: translateY(calc(var(--slide-distance) * -50svh));
     opacity: 0;
     pointer-events: none;
   }
   100% {
-    transform: translateY(calc(var(--slide-distance) * -50dvh));
+    transform: translateY(calc(var(--slide-distance) * -50svh));
     opacity: 0;
     pointer-events: none;
   }

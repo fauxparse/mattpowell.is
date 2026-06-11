@@ -1,6 +1,15 @@
 import { cn } from '@/lib/utils/index.ts'
+import { useReducedMotion } from '@/lib/utils/useReducedMotion'
+import type { ViewTransitionDocument } from '@/types/ViewTransitionDocument'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { useCallback, useReducer } from 'react'
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useReducer,
+} from 'react'
+import { flushSync } from 'react-dom'
 
 export const TAG_COLORS = [
   'red',
@@ -41,6 +50,7 @@ export const Tag = ({
   onClick,
 }: VariantProps<typeof TagVariants> & TagProps) => {
   const Component = onClick ? 'button' : 'span'
+
   return (
     <Component
       className={cn(
@@ -70,7 +80,42 @@ type TagAction =
       type: 'clear'
     }
 
-export const useTags = () => {
+type TagsContext = {
+  tags: string[]
+  tagColors: Record<string, TagColor>
+  selected: Set<string>
+  select: (tag: string) => void
+  deselect: (tag: string) => void
+  toggle: (tag: string) => void
+  clear: () => void
+}
+
+const TagsContext = createContext<TagsContext>({
+  tags: [],
+  tagColors: {},
+  selected: new Set(),
+  select: () => {},
+  deselect: () => {},
+  toggle: () => {},
+  clear: () => {},
+})
+
+export const TagsProvider = ({
+  tags,
+  children,
+}: React.PropsWithChildren<{ tags: string[] }>) => {
+  const tagColors = useMemo(
+    () =>
+      tags.reduce(
+        (acc, tag, index) => {
+          acc[tag] = TAG_COLORS[index % TAG_COLORS.length]
+          return acc
+        },
+        {} as Record<string, TagColor>,
+      ),
+    [tags],
+  )
+
   const [selected, dispatch] = useReducer(
     (tags: Set<string>, action: TagAction) => {
       const newTags = new Set(tags)
@@ -96,25 +141,45 @@ export const useTags = () => {
     new Set<string>(),
   )
 
+  const prefersReducedMotion = useReducedMotion()
+
+  const change = useCallback(
+    (action: TagAction) => {
+      const viewTransitionDocument = document as ViewTransitionDocument
+      if (viewTransitionDocument.startViewTransition && !prefersReducedMotion) {
+        viewTransitionDocument.startViewTransition(() => {
+          flushSync(() => {
+            dispatch(action)
+          })
+        })
+      } else {
+        dispatch(action)
+      }
+    },
+    [prefersReducedMotion],
+  )
+
   const select = useCallback(
-    (tag: string) => dispatch({ type: 'select', tag }),
-    [],
+    (tag: string) => change({ type: 'select', tag }),
+    [change],
   )
   const deselect = useCallback(
-    (tag: string) => dispatch({ type: 'deselect', tag }),
-    [],
+    (tag: string) => change({ type: 'deselect', tag }),
+    [change],
   )
   const toggle = useCallback(
-    (tag: string) => dispatch({ type: 'toggle', tag }),
-    [],
+    (tag: string) => change({ type: 'toggle', tag }),
+    [change],
   )
-  const clear = useCallback(() => dispatch({ type: 'clear' }), [])
+  const clear = useCallback(() => change({ type: 'clear' }), [change])
 
-  return {
-    selected,
-    select,
-    deselect,
-    toggle,
-    clear,
-  }
+  return (
+    <TagsContext.Provider
+      value={{ tags, tagColors, selected, select, deselect, toggle, clear }}
+    >
+      {children}
+    </TagsContext.Provider>
+  )
 }
+
+export const useTags = () => useContext(TagsContext)

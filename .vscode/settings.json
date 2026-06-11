@@ -30,10 +30,13 @@
   "[markdown]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
   },
-  "search.exclude": {
+  "files.readonlyInclude": {
     "**/routeTree.gen.ts": true
   },
-  "files.readonlyInclude": {
+  "files.watcherExclude": {
+    "**/routeTree.gen.ts": true
+  },
+  "search.exclude": {
     "**/routeTree.gen.ts": true
   }
 }

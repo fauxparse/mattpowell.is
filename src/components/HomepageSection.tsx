@@ -28,7 +28,9 @@ const Paragraph = ({ children }: React.PropsWithChildren) => {
 
 const Note = ({ children }: React.PropsWithChildren) => {
   return (
-    <p className="max-w-[32em] text-2xl text-muted-foreground">{children}</p>
+    <p className="max-w-[32em] text-hero-note text-muted-foreground">
+      {children}
+    </p>
   )
 }
 

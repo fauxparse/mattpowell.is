@@ -146,7 +146,9 @@ export const ThemeSelector = () => {
       <SelectTrigger chevron={false}>
         <SelectValue placeholder="Select a theme">
           <ThemeSwatch theme={theme} colorScheme={colorScheme} />
-          {`${upperFirst(colorScheme)} (${theme})`}
+          <span className="hidden md:block">
+            {`${upperFirst(colorScheme)} (${theme})`}
+          </span>
         </SelectValue>
       </SelectTrigger>
       <SelectContent
