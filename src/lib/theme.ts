@@ -1,5 +1,4 @@
 import type { ViewTransitionDocument } from '@/types/ViewTransitionDocument'
-import { useReducedMotion } from './utils/useReducedMotion'
 
 export const THEMES = ['light', 'dark'] as const
 export type Theme = (typeof THEMES)[number]
@@ -16,13 +15,8 @@ function applyWithThemeTransition(
   { transition = true }: ThemeChangeOptions = {},
 ) {
   const viewTransitionDocument = document as ViewTransitionDocument
-  const prefersReducedMotion = useReducedMotion()
 
-  if (
-    !transition ||
-    prefersReducedMotion ||
-    !viewTransitionDocument.startViewTransition
-  ) {
+  if (!transition || !viewTransitionDocument.startViewTransition) {
     update()
     return
   }

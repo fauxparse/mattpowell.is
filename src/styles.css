@@ -55,6 +55,8 @@
   --color-panel-inverse: var(--panel-inverse);
   --color-panel-inverse-foreground: var(--panel-inverse-foreground);
   --color-border: var(--border);
+  --color-tooltip-background: var(--tooltip-background);
+  --color-tooltip-foreground: var(--tooltip-foreground);
   --text-hero: clamp(0.875rem, 5vw, 2rem);
   --text-hero-note: clamp(0.875rem, 3vw, 1.5rem);
   --text-h1: clamp(2.5rem, 5vw, 4rem);
@@ -111,6 +113,9 @@
     --border: var(--color-neutral-300);
     --input: var(--color-neutral-300);
 
+    --tooltip-background: var(--color-accent-200);
+    --tooltip-foreground: var(--color-accent-900);
+
     --portrait-outline: var(--color-neutral-800);
     --portrait-hair: var(--color-neutral-700);
     --portrait-light: var(--color-neutral-600);
@@ -160,6 +165,9 @@
     --portrait-light: var(--color-neutral-600);
     --portrait-lighter: var(--color-neutral-400);
     --portrait-lightest: var(--color-neutral-300);
+
+    --tooltip-background: var(--color-accent-800);
+    --tooltip-foreground: var(--color-accent-100);
 
     --panel-inverse: var(--color-neutral-200);
     --panel-inverse-foreground: var(--color-neutral-800);
@@ -401,11 +409,14 @@
     @apply bg-background text-foreground;
   }
 
-  abbr {
+  abbr,
+  dfn {
+    text-decoration: underline;
     text-underline-offset: 0.25em;
     text-decoration-thickness: 1px;
     text-decoration-style: solid;
     text-decoration-color: var(--color-border);
+    font-style: normal;
     color: var(--foreground);
   }
 

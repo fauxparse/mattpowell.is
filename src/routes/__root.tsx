@@ -8,6 +8,7 @@ import { ThemeToggle } from '../components/ThemeToggle'
 import { BoilFilter } from '@/components/BoilFilter.tsx'
 import { ThemeProvider } from '@/components/ThemeProvider.tsx'
 import { SITE_DEFAULT_DESCRIPTION, SITE_NAME, SITE_OG_IMAGE } from '@/lib/site'
+import { TooltipProvider } from '@/components/ui/tooltip'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -31,7 +32,9 @@ function RootDocument() {
       <HeadContent />
       <BoilFilter />
       <ThemeToggle />
-      <Outlet />
+      <TooltipProvider>
+        <Outlet />
+      </TooltipProvider>
       <TanStackDevtools
         config={{
           position: 'bottom-left',

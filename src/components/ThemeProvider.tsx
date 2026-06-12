@@ -26,6 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from './ui/select'
+import { useReducedMotion } from '@/lib/utils/useReducedMotion'
 
 const ThemeOptions = SCHEMES.flatMap((scheme) =>
   THEMES.map((theme) => ({
@@ -57,23 +58,31 @@ export const ThemeProvider = ({ children }: React.PropsWithChildren) => {
   const [theme, _setTheme] = useState<Theme>(getResolvedTheme())
   const [colorScheme, _setColorScheme] = useState<Scheme>(getResolvedScheme())
 
-  const setTheme = useCallback((theme: Theme) => {
-    _setTheme(theme)
-    applyTheme(theme)
-  }, [])
+  const reducedMotion = useReducedMotion()
 
-  const setColorScheme = useCallback((colorScheme: Scheme) => {
-    _setColorScheme(colorScheme)
-    applyScheme(colorScheme)
-  }, [])
+  const setTheme = useCallback(
+    (theme: Theme) => {
+      _setTheme(theme)
+      applyTheme(theme, { transition: !reducedMotion })
+    },
+    [reducedMotion],
+  )
+
+  const setColorScheme = useCallback(
+    (colorScheme: Scheme) => {
+      _setColorScheme(colorScheme)
+      applyScheme(colorScheme, { transition: !reducedMotion })
+    },
+    [reducedMotion],
+  )
 
   const setThemeAndColorScheme = useCallback(
     (theme: Theme, colorScheme: Scheme) => {
       _setTheme(theme)
       _setColorScheme(colorScheme)
-      applyThemeAndScheme(theme, colorScheme)
+      applyThemeAndScheme(theme, colorScheme, { transition: !reducedMotion })
     },
-    [],
+    [reducedMotion],
   )
 
   const toggleTheme = useCallback(() => {
