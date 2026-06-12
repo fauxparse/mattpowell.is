@@ -5,29 +5,27 @@ import './-Home.css'
 import { HomepageSection } from '@/components/HomepageSection.tsx'
 import { useCallback, useRef } from 'react'
 import { Footer } from '@/components/Footer.tsx'
+import { SITE_DEFAULT_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/site'
 
 export const Route = createFileRoute('/')({
   component: Home,
   head: () => ({
     meta: [
-      { title: 'Matt Powell' },
+      { title: SITE_NAME },
       {
         name: 'description',
-        content:
-          'Matt Powell — performer, artist, and developer based in Wellington, Aotearoa New Zealand.',
+        content: SITE_DEFAULT_DESCRIPTION,
       },
-      { property: 'og:url', content: 'https://mattpowell.is/' },
-      { property: 'og:title', content: 'Matt Powell' },
+      { property: 'og:url', content: `${SITE_URL}/` },
+      { property: 'og:title', content: SITE_NAME },
       {
         property: 'og:description',
-        content:
-          'Matt Powell — performer, artist, and developer based in Wellington, Aotearoa New Zealand.',
+        content: SITE_DEFAULT_DESCRIPTION,
       },
-      { name: 'twitter:title', content: 'Matt Powell' },
+      { name: 'twitter:title', content: SITE_NAME },
       {
         name: 'twitter:description',
-        content:
-          'Matt Powell — performer, artist, and developer based in Wellington, Aotearoa New Zealand.',
+        content: SITE_DEFAULT_DESCRIPTION,
       },
     ],
   }),

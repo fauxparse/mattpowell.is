@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import type { Workshop as WorkshopDefinition } from '../-components/types'
+import { createWorkshopHead } from '../-components/createWorkshopHead'
 import { WorkshopHeader } from '../-components/WorkshopHeader'
 import { WorkshopBody } from '../-components/WorkshopBody'
 
@@ -13,6 +14,7 @@ export const Workshop = {
 
 export const Route = createFileRoute('/teaching/workshops/en-pointe')({
   component: RouteComponent,
+  head: () => createWorkshopHead(Workshop),
 })
 
 function RouteComponent() {
@@ -34,7 +36,7 @@ function RouteComponent() {
         <p>
           The first half of this workshop is a crash course in ballet technique,
           including basic movement vocabulary, body positioning, and what to do
-          with your arms. You’ll even learn how to lift your scene partner
+          with your arms. You’ll even learn how to “lift” your scene partner
           safely.
         </p>
         <p>

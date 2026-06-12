@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import type { Workshop as WorkshopDefinition } from '../-components/types'
+import { createWorkshopHead } from '../-components/createWorkshopHead'
 import { WorkshopHeader } from '../-components/WorkshopHeader'
 import { WorkshopBody } from '../-components/WorkshopBody'
 
@@ -15,6 +16,7 @@ export const Route = createFileRoute(
   '/teaching/workshops/starting-over-and-over',
 )({
   component: RouteComponent,
+  head: () => createWorkshopHead(Workshop),
 })
 
 function RouteComponent() {

@@ -3,6 +3,7 @@ import { createFileRoute, Outlet } from '@tanstack/react-router'
 import { hasWorkshop } from './-components/types'
 import { TagsProvider } from '@/components/ui/tag'
 import { useMemo } from 'react'
+import { SITE_URL } from '@/lib/site'
 
 const workshopModules = import.meta.glob('./workshops/*.tsx', { eager: true })
 const workshops = Object.values(workshopModules)
@@ -35,7 +36,7 @@ export const Route = createFileRoute('/teaching')({
         content:
           'Improv workshops by Matt Powell — available for festivals and events across Aotearoa and internationally.',
       },
-      { property: 'og:url', content: 'https://mattpowell.is/teaching' },
+      { property: 'og:url', content: `${SITE_URL}/teaching` },
       { property: 'og:title', content: 'Matt Powell is teaching' },
       {
         property: 'og:description',

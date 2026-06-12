@@ -7,23 +7,19 @@ import { SpeedInsights } from '@vercel/speed-insights/react'
 import { ThemeToggle } from '../components/ThemeToggle'
 import { BoilFilter } from '@/components/BoilFilter.tsx'
 import { ThemeProvider } from '@/components/ThemeProvider.tsx'
-
-const BASE_URL = 'https://mattpowell.is'
-const OG_IMAGE = `${BASE_URL}/photos/matt-powell-og.jpg`
-const DEFAULT_DESCRIPTION =
-  'Matt Powell — performer, artist, and developer based in Wellington, Aotearoa New Zealand.'
+import { SITE_DEFAULT_DESCRIPTION, SITE_NAME, SITE_OG_IMAGE } from '@/lib/site'
 
 export const Route = createRootRoute({
   head: () => ({
     meta: [
       { charSet: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { name: 'description', content: DEFAULT_DESCRIPTION },
+      { name: 'description', content: SITE_DEFAULT_DESCRIPTION },
       { property: 'og:type', content: 'website' },
-      { property: 'og:site_name', content: 'Matt Powell' },
-      { property: 'og:image', content: OG_IMAGE },
+      { property: 'og:site_name', content: SITE_NAME },
+      { property: 'og:image', content: SITE_OG_IMAGE },
       { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:image', content: OG_IMAGE },
+      { name: 'twitter:image', content: SITE_OG_IMAGE },
     ],
   }),
   component: RootDocument,

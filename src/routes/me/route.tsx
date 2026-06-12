@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { SITE_URL } from '@/lib/site'
 import { lazy } from 'react'
 
 const MePage = lazy(() => import('./-me.component'))
@@ -13,7 +14,7 @@ export const Route = createFileRoute('/me')({
         content:
           'Bio and photos for Matt Powell — performer, artist, and developer.',
       },
-      { property: 'og:url', content: 'https://mattpowell.is/me' },
+      { property: 'og:url', content: `${SITE_URL}/me` },
       { property: 'og:title', content: 'Matt Powell has a media kit' },
       {
         property: 'og:description',
