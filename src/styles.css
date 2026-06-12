@@ -107,7 +107,7 @@
     --background-gradient-dark: var(--color-neutral-300);
     --foreground: var(--color-neutral-900);
     --muted: var(--color-neutral-200);
-    --muted-foreground: var(--color-neutral-600);
+    --muted-foreground: var(--color-neutral-500);
     --panel-inverse: var(--color-neutral-300);
     --panel-inverse-foreground: var(--color-neutral-800);
     --border: var(--color-neutral-300);

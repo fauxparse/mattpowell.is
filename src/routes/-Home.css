@@ -239,17 +239,12 @@ html[data-home-programmatic-scroll='true']:has(.home) {
 }
 
 @keyframes headingIn {
-  0% {
+  from {
     transform: translateY(calc(var(--slide-distance) * 100svh));
     opacity: 0;
     pointer-events: none;
   }
-  25% {
-    transform: translateY(calc(var(--slide-distance) * 100svh));
-    opacity: 0;
-    pointer-events: none;
-  }
-  100% {
+  to {
     transform: translateY(0);
     opacity: 1;
     pointer-events: auto;
@@ -280,7 +275,7 @@ html[data-home-programmatic-scroll='true']:has(.home) {
     opacity: 0;
     pointer-events: none;
   }
-  50% {
+  60% {
     transform: translateY(calc(var(--slide-distance) * 50svh));
     opacity: 0;
     pointer-events: none;
