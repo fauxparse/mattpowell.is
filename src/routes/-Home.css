@@ -7,8 +7,8 @@ html[data-home-programmatic-scroll='true']:has(.home) {
 }
 
 .home {
-  --vertical: 50svh;
-  --big: clamp(2rem, 5vw, 5rem);
+  --vertical: 40svh;
+  --big: clamp(2rem, 4vw, 5rem);
   --horizontal: calc(50% + var(--big) * 1.5);
   --gutter: calc(var(--big) * 0.15);
   --slide-distance: 0.025;

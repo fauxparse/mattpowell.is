@@ -14,6 +14,7 @@ import { Route as MeRouteRouteImport } from './routes/me/route'
 import { Route as ImprovisingRouteRouteImport } from './routes/improvising/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TeachingIndexRouteImport } from './routes/teaching/index'
+import { Route as ImprovisingIndexRouteImport } from './routes/improvising/index'
 import { Route as TeachingWorkshopsTheIdiotRouteImport } from './routes/teaching/workshops/the-idiot'
 import { Route as TeachingWorkshopsStartingOverAndOverRouteImport } from './routes/teaching/workshops/starting-over-and-over'
 import { Route as TeachingWorkshopsSneakingUpOnYourselfRouteImport } from './routes/teaching/workshops/sneaking-up-on-yourself'
@@ -22,6 +23,14 @@ import { Route as TeachingWorkshopsReadingTheSceneRouteImport } from './routes/t
 import { Route as TeachingWorkshopsNothingHappenedTodayRouteImport } from './routes/teaching/workshops/nothing-happened-today'
 import { Route as TeachingWorkshopsEnPointeRouteImport } from './routes/teaching/workshops/en-pointe'
 import { Route as TeachingWorkshopsBigMeMcSkillsRouteImport } from './routes/teaching/workshops/big-me-mc-skills'
+import { Route as ImprovisingShowsYourExtraordinaryLifeRouteImport } from './routes/improvising/shows/your-extraordinary-life'
+import { Route as ImprovisingShowsTheHistoryBoyRouteImport } from './routes/improvising/shows/the-history-boy'
+import { Route as ImprovisingShowsSpontadeityRouteImport } from './routes/improvising/shows/spontadeity'
+import { Route as ImprovisingShowsJerichoFallsRouteImport } from './routes/improvising/shows/jericho-falls'
+import { Route as ImprovisingShowsItsDangerousToGoAloneRouteImport } from './routes/improvising/shows/its-dangerous-to-go-alone'
+import { Route as ImprovisingShowsDontSeeThisShowAloneRouteImport } from './routes/improvising/shows/dont-see-this-show-alone'
+import { Route as ImprovisingShowsCupidsGuideToModernRomanceRouteImport } from './routes/improvising/shows/cupids-guide-to-modern-romance'
+import { Route as ImprovisingShowsAwkwardThreesomeRouteImport } from './routes/improvising/shows/awkward-threesome'
 
 const TeachingRouteRoute = TeachingRouteRouteImport.update({
   id: '/teaching',
@@ -47,6 +56,11 @@ const TeachingIndexRoute = TeachingIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => TeachingRouteRoute,
+} as any)
+const ImprovisingIndexRoute = ImprovisingIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ImprovisingRouteRoute,
 } as any)
 const TeachingWorkshopsTheIdiotRoute =
   TeachingWorkshopsTheIdiotRouteImport.update({
@@ -96,13 +110,70 @@ const TeachingWorkshopsBigMeMcSkillsRoute =
     path: '/workshops/big-me-mc-skills',
     getParentRoute: () => TeachingRouteRoute,
   } as any)
+const ImprovisingShowsYourExtraordinaryLifeRoute =
+  ImprovisingShowsYourExtraordinaryLifeRouteImport.update({
+    id: '/shows/your-extraordinary-life',
+    path: '/shows/your-extraordinary-life',
+    getParentRoute: () => ImprovisingRouteRoute,
+  } as any)
+const ImprovisingShowsTheHistoryBoyRoute =
+  ImprovisingShowsTheHistoryBoyRouteImport.update({
+    id: '/shows/the-history-boy',
+    path: '/shows/the-history-boy',
+    getParentRoute: () => ImprovisingRouteRoute,
+  } as any)
+const ImprovisingShowsSpontadeityRoute =
+  ImprovisingShowsSpontadeityRouteImport.update({
+    id: '/shows/spontadeity',
+    path: '/shows/spontadeity',
+    getParentRoute: () => ImprovisingRouteRoute,
+  } as any)
+const ImprovisingShowsJerichoFallsRoute =
+  ImprovisingShowsJerichoFallsRouteImport.update({
+    id: '/shows/jericho-falls',
+    path: '/shows/jericho-falls',
+    getParentRoute: () => ImprovisingRouteRoute,
+  } as any)
+const ImprovisingShowsItsDangerousToGoAloneRoute =
+  ImprovisingShowsItsDangerousToGoAloneRouteImport.update({
+    id: '/shows/its-dangerous-to-go-alone',
+    path: '/shows/its-dangerous-to-go-alone',
+    getParentRoute: () => ImprovisingRouteRoute,
+  } as any)
+const ImprovisingShowsDontSeeThisShowAloneRoute =
+  ImprovisingShowsDontSeeThisShowAloneRouteImport.update({
+    id: '/shows/dont-see-this-show-alone',
+    path: '/shows/dont-see-this-show-alone',
+    getParentRoute: () => ImprovisingRouteRoute,
+  } as any)
+const ImprovisingShowsCupidsGuideToModernRomanceRoute =
+  ImprovisingShowsCupidsGuideToModernRomanceRouteImport.update({
+    id: '/shows/cupids-guide-to-modern-romance',
+    path: '/shows/cupids-guide-to-modern-romance',
+    getParentRoute: () => ImprovisingRouteRoute,
+  } as any)
+const ImprovisingShowsAwkwardThreesomeRoute =
+  ImprovisingShowsAwkwardThreesomeRouteImport.update({
+    id: '/shows/awkward-threesome',
+    path: '/shows/awkward-threesome',
+    getParentRoute: () => ImprovisingRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/improvising': typeof ImprovisingRouteRoute
+  '/improvising': typeof ImprovisingRouteRouteWithChildren
   '/me': typeof MeRouteRoute
   '/teaching': typeof TeachingRouteRouteWithChildren
+  '/improvising/': typeof ImprovisingIndexRoute
   '/teaching/': typeof TeachingIndexRoute
+  '/improvising/shows/awkward-threesome': typeof ImprovisingShowsAwkwardThreesomeRoute
+  '/improvising/shows/cupids-guide-to-modern-romance': typeof ImprovisingShowsCupidsGuideToModernRomanceRoute
+  '/improvising/shows/dont-see-this-show-alone': typeof ImprovisingShowsDontSeeThisShowAloneRoute
+  '/improvising/shows/its-dangerous-to-go-alone': typeof ImprovisingShowsItsDangerousToGoAloneRoute
+  '/improvising/shows/jericho-falls': typeof ImprovisingShowsJerichoFallsRoute
+  '/improvising/shows/spontadeity': typeof ImprovisingShowsSpontadeityRoute
+  '/improvising/shows/the-history-boy': typeof ImprovisingShowsTheHistoryBoyRoute
+  '/improvising/shows/your-extraordinary-life': typeof ImprovisingShowsYourExtraordinaryLifeRoute
   '/teaching/workshops/big-me-mc-skills': typeof TeachingWorkshopsBigMeMcSkillsRoute
   '/teaching/workshops/en-pointe': typeof TeachingWorkshopsEnPointeRoute
   '/teaching/workshops/nothing-happened-today': typeof TeachingWorkshopsNothingHappenedTodayRoute
@@ -114,9 +185,17 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/improvising': typeof ImprovisingRouteRoute
   '/me': typeof MeRouteRoute
+  '/improvising': typeof ImprovisingIndexRoute
   '/teaching': typeof TeachingIndexRoute
+  '/improvising/shows/awkward-threesome': typeof ImprovisingShowsAwkwardThreesomeRoute
+  '/improvising/shows/cupids-guide-to-modern-romance': typeof ImprovisingShowsCupidsGuideToModernRomanceRoute
+  '/improvising/shows/dont-see-this-show-alone': typeof ImprovisingShowsDontSeeThisShowAloneRoute
+  '/improvising/shows/its-dangerous-to-go-alone': typeof ImprovisingShowsItsDangerousToGoAloneRoute
+  '/improvising/shows/jericho-falls': typeof ImprovisingShowsJerichoFallsRoute
+  '/improvising/shows/spontadeity': typeof ImprovisingShowsSpontadeityRoute
+  '/improvising/shows/the-history-boy': typeof ImprovisingShowsTheHistoryBoyRoute
+  '/improvising/shows/your-extraordinary-life': typeof ImprovisingShowsYourExtraordinaryLifeRoute
   '/teaching/workshops/big-me-mc-skills': typeof TeachingWorkshopsBigMeMcSkillsRoute
   '/teaching/workshops/en-pointe': typeof TeachingWorkshopsEnPointeRoute
   '/teaching/workshops/nothing-happened-today': typeof TeachingWorkshopsNothingHappenedTodayRoute
@@ -129,10 +208,19 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/improvising': typeof ImprovisingRouteRoute
+  '/improvising': typeof ImprovisingRouteRouteWithChildren
   '/me': typeof MeRouteRoute
   '/teaching': typeof TeachingRouteRouteWithChildren
+  '/improvising/': typeof ImprovisingIndexRoute
   '/teaching/': typeof TeachingIndexRoute
+  '/improvising/shows/awkward-threesome': typeof ImprovisingShowsAwkwardThreesomeRoute
+  '/improvising/shows/cupids-guide-to-modern-romance': typeof ImprovisingShowsCupidsGuideToModernRomanceRoute
+  '/improvising/shows/dont-see-this-show-alone': typeof ImprovisingShowsDontSeeThisShowAloneRoute
+  '/improvising/shows/its-dangerous-to-go-alone': typeof ImprovisingShowsItsDangerousToGoAloneRoute
+  '/improvising/shows/jericho-falls': typeof ImprovisingShowsJerichoFallsRoute
+  '/improvising/shows/spontadeity': typeof ImprovisingShowsSpontadeityRoute
+  '/improvising/shows/the-history-boy': typeof ImprovisingShowsTheHistoryBoyRoute
+  '/improvising/shows/your-extraordinary-life': typeof ImprovisingShowsYourExtraordinaryLifeRoute
   '/teaching/workshops/big-me-mc-skills': typeof TeachingWorkshopsBigMeMcSkillsRoute
   '/teaching/workshops/en-pointe': typeof TeachingWorkshopsEnPointeRoute
   '/teaching/workshops/nothing-happened-today': typeof TeachingWorkshopsNothingHappenedTodayRoute
@@ -149,7 +237,16 @@ export interface FileRouteTypes {
     | '/improvising'
     | '/me'
     | '/teaching'
+    | '/improvising/'
     | '/teaching/'
+    | '/improvising/shows/awkward-threesome'
+    | '/improvising/shows/cupids-guide-to-modern-romance'
+    | '/improvising/shows/dont-see-this-show-alone'
+    | '/improvising/shows/its-dangerous-to-go-alone'
+    | '/improvising/shows/jericho-falls'
+    | '/improvising/shows/spontadeity'
+    | '/improvising/shows/the-history-boy'
+    | '/improvising/shows/your-extraordinary-life'
     | '/teaching/workshops/big-me-mc-skills'
     | '/teaching/workshops/en-pointe'
     | '/teaching/workshops/nothing-happened-today'
@@ -161,9 +258,17 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/improvising'
     | '/me'
+    | '/improvising'
     | '/teaching'
+    | '/improvising/shows/awkward-threesome'
+    | '/improvising/shows/cupids-guide-to-modern-romance'
+    | '/improvising/shows/dont-see-this-show-alone'
+    | '/improvising/shows/its-dangerous-to-go-alone'
+    | '/improvising/shows/jericho-falls'
+    | '/improvising/shows/spontadeity'
+    | '/improvising/shows/the-history-boy'
+    | '/improvising/shows/your-extraordinary-life'
     | '/teaching/workshops/big-me-mc-skills'
     | '/teaching/workshops/en-pointe'
     | '/teaching/workshops/nothing-happened-today'
@@ -178,7 +283,16 @@ export interface FileRouteTypes {
     | '/improvising'
     | '/me'
     | '/teaching'
+    | '/improvising/'
     | '/teaching/'
+    | '/improvising/shows/awkward-threesome'
+    | '/improvising/shows/cupids-guide-to-modern-romance'
+    | '/improvising/shows/dont-see-this-show-alone'
+    | '/improvising/shows/its-dangerous-to-go-alone'
+    | '/improvising/shows/jericho-falls'
+    | '/improvising/shows/spontadeity'
+    | '/improvising/shows/the-history-boy'
+    | '/improvising/shows/your-extraordinary-life'
     | '/teaching/workshops/big-me-mc-skills'
     | '/teaching/workshops/en-pointe'
     | '/teaching/workshops/nothing-happened-today'
@@ -191,7 +305,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ImprovisingRouteRoute: typeof ImprovisingRouteRoute
+  ImprovisingRouteRoute: typeof ImprovisingRouteRouteWithChildren
   MeRouteRoute: typeof MeRouteRoute
   TeachingRouteRoute: typeof TeachingRouteRouteWithChildren
 }
@@ -232,6 +346,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/teaching/'
       preLoaderRoute: typeof TeachingIndexRouteImport
       parentRoute: typeof TeachingRouteRoute
+    }
+    '/improvising/': {
+      id: '/improvising/'
+      path: '/'
+      fullPath: '/improvising/'
+      preLoaderRoute: typeof ImprovisingIndexRouteImport
+      parentRoute: typeof ImprovisingRouteRoute
     }
     '/teaching/workshops/the-idiot': {
       id: '/teaching/workshops/the-idiot'
@@ -289,8 +410,95 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeachingWorkshopsBigMeMcSkillsRouteImport
       parentRoute: typeof TeachingRouteRoute
     }
+    '/improvising/shows/your-extraordinary-life': {
+      id: '/improvising/shows/your-extraordinary-life'
+      path: '/shows/your-extraordinary-life'
+      fullPath: '/improvising/shows/your-extraordinary-life'
+      preLoaderRoute: typeof ImprovisingShowsYourExtraordinaryLifeRouteImport
+      parentRoute: typeof ImprovisingRouteRoute
+    }
+    '/improvising/shows/the-history-boy': {
+      id: '/improvising/shows/the-history-boy'
+      path: '/shows/the-history-boy'
+      fullPath: '/improvising/shows/the-history-boy'
+      preLoaderRoute: typeof ImprovisingShowsTheHistoryBoyRouteImport
+      parentRoute: typeof ImprovisingRouteRoute
+    }
+    '/improvising/shows/spontadeity': {
+      id: '/improvising/shows/spontadeity'
+      path: '/shows/spontadeity'
+      fullPath: '/improvising/shows/spontadeity'
+      preLoaderRoute: typeof ImprovisingShowsSpontadeityRouteImport
+      parentRoute: typeof ImprovisingRouteRoute
+    }
+    '/improvising/shows/jericho-falls': {
+      id: '/improvising/shows/jericho-falls'
+      path: '/shows/jericho-falls'
+      fullPath: '/improvising/shows/jericho-falls'
+      preLoaderRoute: typeof ImprovisingShowsJerichoFallsRouteImport
+      parentRoute: typeof ImprovisingRouteRoute
+    }
+    '/improvising/shows/its-dangerous-to-go-alone': {
+      id: '/improvising/shows/its-dangerous-to-go-alone'
+      path: '/shows/its-dangerous-to-go-alone'
+      fullPath: '/improvising/shows/its-dangerous-to-go-alone'
+      preLoaderRoute: typeof ImprovisingShowsItsDangerousToGoAloneRouteImport
+      parentRoute: typeof ImprovisingRouteRoute
+    }
+    '/improvising/shows/dont-see-this-show-alone': {
+      id: '/improvising/shows/dont-see-this-show-alone'
+      path: '/shows/dont-see-this-show-alone'
+      fullPath: '/improvising/shows/dont-see-this-show-alone'
+      preLoaderRoute: typeof ImprovisingShowsDontSeeThisShowAloneRouteImport
+      parentRoute: typeof ImprovisingRouteRoute
+    }
+    '/improvising/shows/cupids-guide-to-modern-romance': {
+      id: '/improvising/shows/cupids-guide-to-modern-romance'
+      path: '/shows/cupids-guide-to-modern-romance'
+      fullPath: '/improvising/shows/cupids-guide-to-modern-romance'
+      preLoaderRoute: typeof ImprovisingShowsCupidsGuideToModernRomanceRouteImport
+      parentRoute: typeof ImprovisingRouteRoute
+    }
+    '/improvising/shows/awkward-threesome': {
+      id: '/improvising/shows/awkward-threesome'
+      path: '/shows/awkward-threesome'
+      fullPath: '/improvising/shows/awkward-threesome'
+      preLoaderRoute: typeof ImprovisingShowsAwkwardThreesomeRouteImport
+      parentRoute: typeof ImprovisingRouteRoute
+    }
   }
 }
+
+interface ImprovisingRouteRouteChildren {
+  ImprovisingIndexRoute: typeof ImprovisingIndexRoute
+  ImprovisingShowsAwkwardThreesomeRoute: typeof ImprovisingShowsAwkwardThreesomeRoute
+  ImprovisingShowsCupidsGuideToModernRomanceRoute: typeof ImprovisingShowsCupidsGuideToModernRomanceRoute
+  ImprovisingShowsDontSeeThisShowAloneRoute: typeof ImprovisingShowsDontSeeThisShowAloneRoute
+  ImprovisingShowsItsDangerousToGoAloneRoute: typeof ImprovisingShowsItsDangerousToGoAloneRoute
+  ImprovisingShowsJerichoFallsRoute: typeof ImprovisingShowsJerichoFallsRoute
+  ImprovisingShowsSpontadeityRoute: typeof ImprovisingShowsSpontadeityRoute
+  ImprovisingShowsTheHistoryBoyRoute: typeof ImprovisingShowsTheHistoryBoyRoute
+  ImprovisingShowsYourExtraordinaryLifeRoute: typeof ImprovisingShowsYourExtraordinaryLifeRoute
+}
+
+const ImprovisingRouteRouteChildren: ImprovisingRouteRouteChildren = {
+  ImprovisingIndexRoute: ImprovisingIndexRoute,
+  ImprovisingShowsAwkwardThreesomeRoute: ImprovisingShowsAwkwardThreesomeRoute,
+  ImprovisingShowsCupidsGuideToModernRomanceRoute:
+    ImprovisingShowsCupidsGuideToModernRomanceRoute,
+  ImprovisingShowsDontSeeThisShowAloneRoute:
+    ImprovisingShowsDontSeeThisShowAloneRoute,
+  ImprovisingShowsItsDangerousToGoAloneRoute:
+    ImprovisingShowsItsDangerousToGoAloneRoute,
+  ImprovisingShowsJerichoFallsRoute: ImprovisingShowsJerichoFallsRoute,
+  ImprovisingShowsSpontadeityRoute: ImprovisingShowsSpontadeityRoute,
+  ImprovisingShowsTheHistoryBoyRoute: ImprovisingShowsTheHistoryBoyRoute,
+  ImprovisingShowsYourExtraordinaryLifeRoute:
+    ImprovisingShowsYourExtraordinaryLifeRoute,
+}
+
+const ImprovisingRouteRouteWithChildren =
+  ImprovisingRouteRoute._addFileChildren(ImprovisingRouteRouteChildren)
 
 interface TeachingRouteRouteChildren {
   TeachingIndexRoute: typeof TeachingIndexRoute
@@ -325,7 +533,7 @@ const TeachingRouteRouteWithChildren = TeachingRouteRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ImprovisingRouteRoute: ImprovisingRouteRoute,
+  ImprovisingRouteRoute: ImprovisingRouteRouteWithChildren,
   MeRouteRoute: MeRouteRoute,
   TeachingRouteRoute: TeachingRouteRouteWithChildren,
 }

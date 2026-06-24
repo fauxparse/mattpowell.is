@@ -33,7 +33,7 @@ const ContactForm = ({
   // TODO: Add success/error messages
 
   return (
-    <form onSubmit={onSubmit} className={cn('panel', className)}>
+    <form onSubmit={onSubmit} className={cn('panel mb-20', className)}>
       <fieldset disabled={sending} className="flex flex-col gap-4">
         <h3 className="text-2xl font-bold m-0 px-4 pt-2 text-accent-500 uppercase not-prose">
           Get in touch

@@ -132,7 +132,7 @@ function Home() {
               r="80"
               fill="none"
               stroke="#66338b"
-              stroke-width="19"
+              strokeWidth="19"
             />
           </svg>
           I’m queer and autistic and I have{' '}

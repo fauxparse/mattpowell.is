@@ -1,18 +1,12 @@
 import { Tag, useTags } from '@/components/ui/tag'
-import type { Workshop } from './types'
-import { useMemo } from 'react'
+import type { Show } from './types'
 import { Link } from '@tanstack/react-router'
 
-type WorkshopHeaderProps = {
-  workshop: Workshop
+type ShowHeaderProps = {
+  show: Show
 }
-export const WorkshopHeader = ({ workshop }: WorkshopHeaderProps) => {
+export const ShowHeader = ({ show }: ShowHeaderProps) => {
   const { tagColors } = useTags()
-
-  const duration = useMemo(() => {
-    const hours = workshop.duration / 60
-    return `${hours === Math.floor(hours) ? hours : hours.toFixed(1)} hour${hours > 1 ? 's' : ''}`
-  }, [workshop.duration])
 
   return (
     <div className="flex flex-col gap-2 py-4 mb-8 rule-after">
@@ -22,23 +16,21 @@ export const WorkshopHeader = ({ workshop }: WorkshopHeaderProps) => {
         </Link>
         &gt;
         <Link
-          to="/teaching"
+          to="/improvising"
           className="text-muted-foreground hover:text-foreground"
         >
-          Workshops
+          Shows
         </Link>
         &gt;
       </div>
-      <h1 className="page-title">{workshop.title}</h1>
+      <h1 className="page-title">{show.title}</h1>
       <p className="text-lg md:text-xl text-muted-foreground text-balance">
-        {workshop.short}
+        {show.short}
       </p>
       <dl className="grid grid-cols-[auto_1fr] items-start mt-2 gap-x-4 gap-y-2 [&>dt]:text-muted-foreground [&>dt]:small-caps">
-        <dt>Duration</dt>
-        <dd>{duration}</dd>
         <dt>Tags</dt>
         <dd className="flex flex-wrap gap-2">
-          {workshop.tags.map((tag) => (
+          {show.tags.map((tag) => (
             <Tag key={tag} color={tagColors[tag]}>
               {tag}
             </Tag>

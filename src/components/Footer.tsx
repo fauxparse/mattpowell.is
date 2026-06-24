@@ -6,7 +6,7 @@ import { CameraIcon, SpeechIcon } from 'lucide-react'
 export const Footer = ({ className }: { className?: string }) => (
   <footer
     className={cn(
-      'flex justify-between items-center py-4 rule pt-4 text-muted-foreground text-sm',
+      'flex justify-between items-center py-4 pt-4 text-muted-foreground text-sm',
       className,
     )}
   >

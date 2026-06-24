@@ -57,8 +57,8 @@
   --color-border: var(--border);
   --color-tooltip-background: var(--tooltip-background);
   --color-tooltip-foreground: var(--tooltip-foreground);
-  --text-hero: clamp(0.875rem, 5vw, 2rem);
-  --text-hero-note: clamp(0.875rem, 3vw, 1.5rem);
+  --text-hero: clamp(1rem, 2.5vw, 2rem);
+  --text-hero-note: clamp(0.875rem, 2vw, 1.75rem);
   --text-h1: clamp(2.5rem, 5vw, 4rem);
   --color-link: var(--link);
   --color-link-underline: var(--link-underline);
@@ -343,12 +343,16 @@
 
   &::before {
     content: '';
-    @apply absolute inset-0 bottom-auto h-1 border-t border-border sketchy pointer-events-none;
+    @apply absolute inset-0 bottom-auto h-1 border-t-[1.5px] border-border sketchy pointer-events-none;
   }
 }
 
 @utility rule-after {
   @apply rule before:top-full;
+}
+
+@utility page-title {
+  @apply text-h1 font-bold text-accent-500 leading-[1.2] md:mt-16 mb-0 text-balance;
 }
 
 :root.theme-view-transition::view-transition-old(root),
@@ -428,6 +432,12 @@
   }
   html {
     @apply font-sans;
+  }
+}
+
+@layer utilities {
+  .prose {
+    --tw-prose-body: var(--color-foreground);
   }
 }
 

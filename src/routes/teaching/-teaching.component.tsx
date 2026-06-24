@@ -3,6 +3,7 @@ import { useMemo } from 'react'
 import { XIcon } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
 import { hasWorkshop } from './-components/types'
+import { Card } from '@/components/Card'
 
 const workshopModules = import.meta.glob('./workshops/*.tsx', { eager: true })
 const workshops = Object.values(workshopModules)
@@ -79,26 +80,13 @@ export default function TeachingPage() {
       <div className="grid grid-cols-[repeat(auto-fit,minmax(20rem,1fr))] auto-rows-[12rem] gap-4 py-8">
         {filtered.map((workshop) =>
           workshop.tags.includes('show') ? null : (
-            <Link
+            <Card
+              key={workshop.id}
               to={`/teaching/workshops/${workshop.id}`}
-              key={workshop.title}
-              className="panel flex flex-col gap-2 before:border before:border-border before:bg-transparent rounded-lg p-4 hover:before:boil"
-              style={{ viewTransitionName: `workshop-${workshop.id}` }}
-            >
-              <div className="flex flex-wrap gap-2">
-                {workshop.tags.map((tag) => (
-                  <Tag key={tag} color={tagColors[tag]}>
-                    {tag}
-                  </Tag>
-                ))}
-              </div>
-              <div className="mt-auto">
-                <h3 className="text-xl font-bold uppercase text-accent-500 text-balance">
-                  {workshop.title}
-                </h3>
-                <p>{workshop.short}</p>
-              </div>
-            </Link>
+              title={workshop.title}
+              short={workshop.short}
+              tags={workshop.tags}
+            />
           ),
         )}
         {Array.from({ length: 4 }).map((_, index) => (

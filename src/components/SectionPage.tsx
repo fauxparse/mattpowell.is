@@ -12,6 +12,6 @@ export const SectionPage = ({
   <div className="mx-auto w-full max-w-5xl px-4 flex flex-col min-h-svh">
     <Header title={title} />
     <main className="grow">{children}</main>
-    <Footer />
+    <Footer className="rule" />
   </div>
 )

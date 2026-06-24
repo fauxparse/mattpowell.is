@@ -9,10 +9,16 @@ type BaseProps = {
   loading?: React.ComponentProps<'img'>['loading']
   decoding?: React.ComponentProps<'img'>['decoding']
   onImageLoad?: React.ComponentProps<'img'>['onLoad']
-  orientation?: 'landscape' | 'portrait'
+  orientation?: 'landscape' | 'portrait' | 'square'
 }
 
 type MaskedImageProps = React.ComponentProps<'div'> & BaseProps
+
+const MaskSizes = {
+  landscape: [800, 600],
+  portrait: [600, 800],
+  square: [800, 800],
+} as const
 
 export const MaskedImage = ({
   src,
@@ -26,8 +32,7 @@ export const MaskedImage = ({
   orientation = 'landscape',
   ...props
 }: MaskedImageProps) => {
-  const maskWidth = orientation === 'landscape' ? 800 : 600
-  const maskHeight = orientation === 'landscape' ? 600 : 800
+  const [maskWidth, maskHeight] = MaskSizes[orientation]
 
   return (
     <div className={cn('relative min-w-0', className)} {...props}>

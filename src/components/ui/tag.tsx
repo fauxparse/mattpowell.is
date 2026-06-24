@@ -100,10 +100,40 @@ const TagsContext = createContext<TagsContext>({
   clear: () => {},
 })
 
+const getNextSelected = (tags: Set<string>, action: TagAction) => {
+  const newTags = new Set(tags)
+
+  switch (action.type) {
+    case 'select':
+      newTags.add(action.tag)
+      break
+    case 'deselect':
+      newTags.delete(action.tag)
+      break
+    case 'toggle':
+      if (newTags.has(action.tag)) {
+        newTags.delete(action.tag)
+      } else {
+        newTags.add(action.tag)
+      }
+      break
+    case 'clear':
+      newTags.clear()
+  }
+
+  return newTags
+}
+
 export const TagsProvider = ({
   tags,
+  selected: controlledSelected,
+  onSelectedChange,
   children,
-}: React.PropsWithChildren<{ tags: string[] }>) => {
+}: React.PropsWithChildren<{
+  tags: string[]
+  selected?: Set<string>
+  onSelectedChange?: (selected: Set<string>) => void
+}>) => {
   const tagColors = useMemo(
     () =>
       tags.reduce(
@@ -116,47 +146,35 @@ export const TagsProvider = ({
     [tags],
   )
 
-  const [selected, dispatch] = useReducer(
-    (tags: Set<string>, action: TagAction) => {
-      const newTags = new Set(tags)
-      switch (action.type) {
-        case 'select':
-          newTags.add(action.tag)
-          break
-        case 'deselect':
-          newTags.delete(action.tag)
-          break
-        case 'toggle':
-          if (newTags.has(action.tag)) {
-            newTags.delete(action.tag)
-          } else {
-            newTags.add(action.tag)
-          }
-          break
-        case 'clear':
-          newTags.clear()
-      }
-      return newTags
-    },
-    new Set<string>(),
+  const [uncontrolledSelected, dispatch] = useReducer(
+    getNextSelected,
+    controlledSelected ?? new Set<string>(),
   )
+  const selected = controlledSelected ?? uncontrolledSelected
 
   const prefersReducedMotion = useReducedMotion()
 
   const change = useCallback(
     (action: TagAction) => {
+      if (onSelectedChange) {
+        onSelectedChange(getNextSelected(selected, action))
+        return
+      }
+
+      const applyChange = () => {
+        dispatch(action)
+      }
+
       const viewTransitionDocument = document as ViewTransitionDocument
       if (viewTransitionDocument.startViewTransition && !prefersReducedMotion) {
         viewTransitionDocument.startViewTransition(() => {
-          flushSync(() => {
-            dispatch(action)
-          })
+          flushSync(applyChange)
         })
       } else {
-        dispatch(action)
+        applyChange()
       }
     },
-    [prefersReducedMotion],
+    [onSelectedChange, prefersReducedMotion, selected],
   )
 
   const select = useCallback(
