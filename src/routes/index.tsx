@@ -190,6 +190,14 @@ function Home() {
         <HomepageSection.Paragraph>
           I’ve written and directed a bunch of short plays for children.
         </HomepageSection.Paragraph>
+        <HomepageSection.Buttons>
+          <Link
+            className="px-4 py-2 bg-accent-500 text-accent-50 rounded-lg text-2xl font-bold sketchy hover:boil"
+            to="/writing"
+          >
+            My scripts
+          </Link>
+        </HomepageSection.Buttons>
       </HomepageSection>
       <HomepageSection title="Building">
         <HomepageSection.Paragraph>

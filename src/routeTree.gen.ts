@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WritingRouteRouteImport } from './routes/writing/route'
 import { Route as TeachingRouteRouteImport } from './routes/teaching/route'
 import { Route as MeRouteRouteImport } from './routes/me/route'
 import { Route as ImprovisingRouteRouteImport } from './routes/improvising/route'
@@ -32,6 +33,11 @@ import { Route as ImprovisingShowsDontSeeThisShowAloneRouteImport } from './rout
 import { Route as ImprovisingShowsCupidsGuideToModernRomanceRouteImport } from './routes/improvising/shows/cupids-guide-to-modern-romance'
 import { Route as ImprovisingShowsAwkwardThreesomeRouteImport } from './routes/improvising/shows/awkward-threesome'
 
+const WritingRouteRoute = WritingRouteRouteImport.update({
+  id: '/writing',
+  path: '/writing',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TeachingRouteRoute = TeachingRouteRouteImport.update({
   id: '/teaching',
   path: '/teaching',
@@ -164,6 +170,7 @@ export interface FileRoutesByFullPath {
   '/improvising': typeof ImprovisingRouteRouteWithChildren
   '/me': typeof MeRouteRoute
   '/teaching': typeof TeachingRouteRouteWithChildren
+  '/writing': typeof WritingRouteRoute
   '/improvising/': typeof ImprovisingIndexRoute
   '/teaching/': typeof TeachingIndexRoute
   '/improvising/shows/awkward-threesome': typeof ImprovisingShowsAwkwardThreesomeRoute
@@ -186,6 +193,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/me': typeof MeRouteRoute
+  '/writing': typeof WritingRouteRoute
   '/improvising': typeof ImprovisingIndexRoute
   '/teaching': typeof TeachingIndexRoute
   '/improvising/shows/awkward-threesome': typeof ImprovisingShowsAwkwardThreesomeRoute
@@ -211,6 +219,7 @@ export interface FileRoutesById {
   '/improvising': typeof ImprovisingRouteRouteWithChildren
   '/me': typeof MeRouteRoute
   '/teaching': typeof TeachingRouteRouteWithChildren
+  '/writing': typeof WritingRouteRoute
   '/improvising/': typeof ImprovisingIndexRoute
   '/teaching/': typeof TeachingIndexRoute
   '/improvising/shows/awkward-threesome': typeof ImprovisingShowsAwkwardThreesomeRoute
@@ -237,6 +246,7 @@ export interface FileRouteTypes {
     | '/improvising'
     | '/me'
     | '/teaching'
+    | '/writing'
     | '/improvising/'
     | '/teaching/'
     | '/improvising/shows/awkward-threesome'
@@ -259,6 +269,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/me'
+    | '/writing'
     | '/improvising'
     | '/teaching'
     | '/improvising/shows/awkward-threesome'
@@ -283,6 +294,7 @@ export interface FileRouteTypes {
     | '/improvising'
     | '/me'
     | '/teaching'
+    | '/writing'
     | '/improvising/'
     | '/teaching/'
     | '/improvising/shows/awkward-threesome'
@@ -308,10 +320,18 @@ export interface RootRouteChildren {
   ImprovisingRouteRoute: typeof ImprovisingRouteRouteWithChildren
   MeRouteRoute: typeof MeRouteRoute
   TeachingRouteRoute: typeof TeachingRouteRouteWithChildren
+  WritingRouteRoute: typeof WritingRouteRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/writing': {
+      id: '/writing'
+      path: '/writing'
+      fullPath: '/writing'
+      preLoaderRoute: typeof WritingRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/teaching': {
       id: '/teaching'
       path: '/teaching'
@@ -536,6 +556,7 @@ const rootRouteChildren: RootRouteChildren = {
   ImprovisingRouteRoute: ImprovisingRouteRouteWithChildren,
   MeRouteRoute: MeRouteRoute,
   TeachingRouteRoute: TeachingRouteRouteWithChildren,
+  WritingRouteRoute: WritingRouteRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
