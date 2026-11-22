@@ -51,18 +51,17 @@ function RouteComponent() {
           failure itself, but to sit with the feeling of having failed. We won’t
           try to do bad improv, but we will set up scenes where participants are
           encouraged to push past their comfort zones to the point of failure.
-          We will explicitly and honestly address what went wrong in the scene
-          and why it was your fault. Then we will get up and do more scenes.
+          We work with a hard rule that everyone in the room is only allowed to
+          give feedback on their own work — even the teachers.
         </p>
         <p>
-          My ideal way to run this workshop would be as a whole-day intensive.
-          Before the workshop, I would ask participants for any areas they want
-          to push on, and anything they’d like to really steer clear of. In the
-          morning, we would run scenes that suck, then we would have a lunch
-          break where I would encourage participants to take some time to be by
-          themselves. In the afternoon we would have a check-in and then run
-          scenes that don’t suck, partially as a kind of palate cleanser, and
-          partially as a way to celebrate together.
+          This workshop was developed and taught with Katherine Weaver
+          (Naarm/Melbourne) for the 2026 New Zealand Improv Festival.
+        </p>
+        <p>
+          My ideal way to run this workshop would be as a whole-day intensive
+          (two three-hour blocks) with a co-teacher (preferably Katherine
+          because she's fantastic).
         </p>
       </WorkshopBody>
     </>
