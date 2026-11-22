@@ -238,6 +238,53 @@ html[data-home-programmatic-scroll='true']:has(.home) {
   }
 }
 
+@supports not (
+  (animation-timeline: --creating) and (timeline-scope: --creating) and
+    (animation-range: entry exit) and (view-timeline: --creating)
+) {
+  html:has(.home) {
+    scroll-snap-type: none;
+  }
+
+  .home {
+    > header {
+      position: relative;
+      height: calc(var(--vertical) + var(--big) * 1.5);
+    }
+
+    > section {
+      height: auto;
+      overflow: visible;
+      padding-block: 1rem 3rem;
+
+      h2 {
+        position: static;
+        margin-bottom: 1rem;
+        text-align: center;
+        animation: none;
+      }
+
+      .content {
+        position: relative;
+        inset: auto;
+        animation: none;
+      }
+    }
+
+    > div:has(> footer) {
+      position: relative;
+    }
+
+    [data-scroll-indicator='down'] {
+      display: none;
+    }
+
+    [data-part='greys'] path {
+      animation: none;
+    }
+  }
+}
+
 @keyframes headingIn {
   from {
     transform: translateY(calc(var(--slide-distance) * 100svh));

@@ -41,6 +41,18 @@ pnpm format
 pnpm check
 ```
 
+### Homepage scrolling
+
+The animated homepage requires CSS scroll-driven animations, named view timelines,
+timeline scoping, and animation ranges. Browsers missing any of these features,
+including older iOS Safari versions, use a normal document layout instead. Sections
+and the footer stay in document flow, scroll snapping is disabled, and the animated
+scroll indicator is hidden.
+
+When changing `src/routes/-Home.css`, check both layouts at mobile and desktop
+widths. In the fallback, every section and the contact links must remain reachable
+without overlapping or clipping.
+
 ## Routing
 
 File-based routing with [TanStack Router](https://tanstack.com/router). Routes are in `src/routes/`.
